@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#e4f56a"/>
+      <stop offset="0.45" stop-color="#f6d7a7"/>
+      <stop offset="1" stop-color="#f2b5e3"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.45" r="0.55">
+      <stop offset="0" stop-color="#e4f56a" stop-opacity="0.18"/>
+      <stop offset="0.6" stop-color="#f2b5e3" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#08080a" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .h{font-family:Inter,'Geist','Helvetica Neue',Arial,sans-serif;font-weight:700;letter-spacing:-3px}
+      .s{font-family:Inter,'Geist','Helvetica Neue',Arial,sans-serif}
+      .m{font-family:'Geist Mono','SF Mono',Menlo,monospace}
+      @keyframes sw{0%,100%{transform:scaleX(1)}50%{transform:scaleX(-1)}}
+      .bp{transform-box:fill-box;transform-origin:center;animation:sw 4s ease-in-out infinite}
+    </style>
+  </defs>
+  <rect width="1280" height="640" fill="#08080a"/>
+  <rect width="1280" height="640" fill="url(#glow)"/>
+  <g transform="translate(80,92)">
+    <rect x="0" y="0" width="390" height="34" rx="17" fill="none" stroke="#26262d"/>
+    <circle cx="20" cy="17" r="4" fill="#e4f56a"/>
+    <text x="34" y="22" class="m" font-size="14" fill="#9a9aa3">built on Oriane video intelligence</text>
+    <text x="0" y="150" class="h" font-size="112" fill="#f4f4ef">Helix</text>
+    <text x="0" y="230" class="h" font-size="58" fill="#f4f4ef">Every viral video</text>
+    <text x="0" y="296" class="h" font-size="58" fill="#f4f4ef">has a <tspan fill="url(#g)">genome.</tspan></text>
+    <text x="0" y="356" class="s" font-size="22" fill="#9a9aa3">Sequence what short-form videos show, say, overlay and sound like.</text>
+    <text x="0" y="388" class="s" font-size="22" fill="#9a9aa3">Measure which genes lift views. Fork the structure, never the content.</text>
+    <g transform="translate(0,430)" class="m" font-size="14">
+      <rect width="96" height="30" rx="15" fill="#d9f99d" fill-opacity=".12" stroke="#d9f99d" stroke-opacity=".5"/><text x="20" y="20" fill="#d9f99d">VISUAL</text>
+      <rect x="106" width="100" height="30" rx="15" fill="#f9a8d4" fill-opacity=".12" stroke="#f9a8d4" stroke-opacity=".5"/><text x="126" y="20" fill="#f9a8d4">SPOKEN</text>
+      <rect x="216" width="118" height="30" rx="15" fill="#7dd3fc" fill-opacity=".12" stroke="#7dd3fc" stroke-opacity=".5"/><text x="236" y="20" fill="#7dd3fc">ON-SCREEN</text>
+      <rect x="344" width="88" height="30" rx="15" fill="#fcd34d" fill-opacity=".12" stroke="#fcd34d" stroke-opacity=".5"/><text x="364" y="20" fill="#fcd34d">SOUND</text>
+      <rect x="442" width="96" height="30" rx="15" fill="#c4b5fd" fill-opacity=".12" stroke="#c4b5fd" stroke-opacity=".5"/><text x="462" y="20" fill="#c4b5fd">FORMAT</text>
+    </g>
+  </g>
+  <g transform="translate(900,50)">
+    <g stroke-linecap="round" stroke-width="5">
+      <line class="bp" x1="20" x2="220" y1="20" y2="20" stroke="#d9f99d" style="animation-delay:0s"/>
+      <line class="bp" x1="34" x2="206" y1="48" y2="48" stroke="#f9a8d4" style="animation-delay:-.2s"/>
+      <line class="bp" x1="58" x2="182" y1="76" y2="76" stroke="#7dd3fc" style="animation-delay:-.4s"/>
+      <line class="bp" x1="90" x2="150" y1="104" y2="104" stroke="#fcd34d" style="animation-delay:-.6s"/>
+      <line class="bp" x1="112" x2="128" y1="132" y2="132" stroke="#c4b5fd" style="animation-delay:-.8s"/>
+      <line class="bp" x1="90" x2="150" y1="160" y2="160" stroke="#d9f99d" style="animation-delay:-1s"/>
+      <line class="bp" x1="58" x2="182" y1="188" y2="188" stroke="#f9a8d4" style="animation-delay:-1.2s"/>
+      <line class="bp" x1="34" x2="206" y1="216" y2="216" stroke="#7dd3fc" style="animation-delay:-1.4s"/>
+      <line class="bp" x1="20" x2="220" y1="244" y2="244" stroke="#fcd34d" style="animation-delay:-1.6s"/>
+      <line class="bp" x1="34" x2="206" y1="272" y2="272" stroke="#c4b5fd" style="animation-delay:-1.8s"/>
+      <line class="bp" x1="58" x2="182" y1="300" y2="300" stroke="#d9f99d" style="animation-delay:-2s"/>
+      <line class="bp" x1="90" x2="150" y1="328" y2="328" stroke="#f9a8d4" style="animation-delay:-2.2s"/>
+      <line class="bp" x1="112" x2="128" y1="356" y2="356" stroke="#7dd3fc" style="animation-delay:-2.4s"/>
+      <line class="bp" x1="90" x2="150" y1="384" y2="384" stroke="#fcd34d" style="animation-delay:-2.6s"/>
+      <line class="bp" x1="58" x2="182" y1="412" y2="412" stroke="#c4b5fd" style="animation-delay:-2.8s"/>
+      <line class="bp" x1="34" x2="206" y1="440" y2="440" stroke="#d9f99d" style="animation-delay:-3s"/>
+      <line class="bp" x1="20" x2="220" y1="468" y2="468" stroke="#f9a8d4" style="animation-delay:-3.2s"/>
+      <line class="bp" x1="34" x2="206" y1="496" y2="496" stroke="#7dd3fc" style="animation-delay:-3.4s"/>
+      <line class="bp" x1="58" x2="182" y1="524" y2="524" stroke="#fcd34d" style="animation-delay:-3.6s"/>
+    </g>
+  </g>
+  <text x="80" y="600" class="m" font-size="14" fill="#5f5f68">Hack the Feed · Amplitude HQ · San Francisco · Nov 6 2026</text>
+</svg>

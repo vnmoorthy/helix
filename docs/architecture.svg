@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#9a9aa3"/></marker>
+    <style>
+      .t{font-family:Inter,'Helvetica Neue',Arial,sans-serif;fill:#f4f4ef}
+      .m{font-family:'SF Mono',Menlo,monospace;fill:#9a9aa3}
+      .box{fill:#111114;stroke:#26262d;stroke-width:1.5}
+      .ln{stroke:#9a9aa3;stroke-width:1.6;fill:none;marker-end:url(#a)}
+      @keyframes d{to{stroke-dashoffset:-40}}
+      .flow{stroke-dasharray:6 6;animation:d 1.2s linear infinite}
+    </style>
+  </defs>
+  <rect width="1280" height="760" fill="#08080a"/>
+  <text x="40" y="52" class="t" font-size="26" font-weight="700">Helix architecture</text>
+  <text x="40" y="78" class="m" font-size="13">every gene = an Oriane field + a timestamp · nothing on screen is hallucinated</text>
+
+  <!-- Client -->
+  <rect x="40" y="110" width="250" height="250" rx="16" class="box"/>
+  <text x="60" y="142" class="t" font-size="16" font-weight="700">Next.js 16 UI</text>
+  <text x="60" y="166" class="m" font-size="12">React 19 · Tailwind v4 · framer-motion</text>
+  <text x="60" y="200" class="t" font-size="13">/  sequence a niche</text>
+  <text x="60" y="224" class="t" font-size="13">/g/[niche]  genome report</text>
+  <text x="60" y="248" class="t" font-size="13">  · winning genome</text>
+  <text x="60" y="272" class="t" font-size="13">  · gene leaderboard + wall</text>
+  <text x="60" y="296" class="t" font-size="13">  · 5-track video genome</text>
+  <text x="60" y="320" class="t" font-size="13">  · fork / agency roster</text>
+
+  <!-- API -->
+  <rect x="350" y="110" width="250" height="250" rx="16" class="box"/>
+  <text x="370" y="142" class="t" font-size="16" font-weight="700">Route handlers</text>
+  <text x="370" y="166" class="m" font-size="12">server-only · key never leaves</text>
+  <text x="370" y="204" class="t" font-size="13">GET  /api/niche?q=</text>
+  <text x="370" y="230" class="t" font-size="13">POST /api/fork</text>
+  <text x="370" y="256" class="t" font-size="13">GET  /api/status</text>
+  <text x="370" y="282" class="t" font-size="13">POST /api/key (localhost only)</text>
+  <text x="370" y="320" class="m" font-size="12">lib/engine.ts orchestrates</text>
+
+  <!-- Oriane -->
+  <rect x="660" y="110" width="580" height="250" rx="16" fill="#111114" stroke="#e4f56a" stroke-opacity=".5" stroke-width="1.5"/>
+  <text x="680" y="142" class="t" font-size="16" font-weight="700">Oriane video intelligence API</text>
+  <text x="680" y="166" class="m" font-size="12">connect.oriane.xyz/rest · TikTok + Instagram · projection=full</text>
+  <g font-size="12.5">
+    <rect x="680" y="186" width="260" height="76" rx="10" fill="#17171c" stroke="#26262d"/>
+    <text x="694" y="208" class="t" font-weight="600">① contents/search (niche)</text>
+    <text x="694" y="228" class="m">OR of 4 named sub-queries:</text>
+    <text x="694" y="248" class="m"><tspan fill="#f9a8d4">said</tspan> · <tspan fill="#7dd3fc">onscreen</tspan> · <tspan fill="#c4b5fd">caption</tspan> · <tspan fill="#d9f99d">seen</tspan></text>
+    <rect x="955" y="186" width="265" height="76" rx="10" fill="#17171c" stroke="#26262d"/>
+    <text x="969" y="208" class="t" font-weight="600">② assets (text → vector)</text>
+    <text x="969" y="228" class="m">niche + 6 visual probes</text>
+    <text x="969" y="248" class="m">cached in data/assets.json</text>
+    <rect x="680" y="272" width="540" height="70" rx="10" fill="#17171c" stroke="#26262d"/>
+    <text x="694" y="294" class="t" font-weight="600">③ contents/search (AI-Vision probes, id ∈ corpus)</text>
+    <text x="694" y="316" class="m">face-cam · hands+product · screen · outdoors · text card · before/after</text>
+    <text x="694" y="334" class="m">→ frames[].visualSimilarityScore @ timestamp</text>
+  </g>
+
+  <!-- Engine -->
+  <rect x="40" y="420" width="560" height="300" rx="16" class="box"/>
+  <text x="60" y="452" class="t" font-size="16" font-weight="700">Gene engine  ·  lib/genes.ts</text>
+  <text x="60" y="476" class="m" font-size="12">deterministic extractors · 32 genes · 5 tracks</text>
+  <g font-size="12.5">
+    <circle cx="66" cy="506" r="5" fill="#d9f99d"/><text x="80" y="510" class="t">Visual   — AI-Vision probe hits per frame</text>
+    <circle cx="66" cy="532" r="5" fill="#f9a8d4"/><text x="80" y="536" class="t">Spoken   — transcriptChunks: hook type, time-to-word, pace, CTA</text>
+    <circle cx="66" cy="558" r="5" fill="#7dd3fc"/><text x="80" y="562" class="t">On-screen — onScreenTextRegions: frame-1 hook, captions, CAPS, POV</text>
+    <circle cx="66" cy="584" r="5" fill="#fcd34d"/><text x="80" y="588" class="t">Sound    — audioTitle/Author/Copyrighted: original, licensed, trending</text>
+    <circle cx="66" cy="610" r="5" fill="#c4b5fd"/><text x="80" y="614" class="t">Format   — duration, caption length, hashtag count</text>
+  </g>
+  <text x="60" y="654" class="t" font-size="13.5" font-weight="600">Lift(gene) = median(views/follower | gene) ÷ median(views/follower | ¬gene)</text>
+  <text x="60" y="678" class="m" font-size="12">+ top-quartile vs bottom-quartile share · n per gene · winning genome = best gene per track</text>
+  <text x="60" y="702" class="m" font-size="12">mutually-exclusive gene groups respected (length, sound, overlay style)</text>
+
+  <!-- Fork -->
+  <rect x="660" y="420" width="280" height="300" rx="16" class="box"/>
+  <text x="680" y="452" class="t" font-size="16" font-weight="700">Fork engine · lib/fork.ts</text>
+  <text x="680" y="476" class="m" font-size="12">structure inherited, content original</text>
+  <text x="680" y="512" class="t" font-size="13">4 beats: HOOK · SETUP · PROOF · CTA</text>
+  <text x="680" y="538" class="t" font-size="13">shot · say · on-screen · sound</text>
+  <text x="680" y="564" class="t" font-size="13">inherited-gene badges per beat</text>
+  <text x="680" y="590" class="t" font-size="13">agency roster batch-fork</text>
+  <text x="680" y="626" class="m" font-size="12">optional LLM polish:</text>
+  <text x="680" y="646" class="m" font-size="12">GMI Cloud · Claude · OpenAI</text>
+  <text x="680" y="672" class="m" font-size="12">export .md · print · copy</text>
+
+  <!-- Cache -->
+  <rect x="1000" y="420" width="240" height="140" rx="16" class="box"/>
+  <text x="1020" y="452" class="t" font-size="16" font-weight="700">Sequence cache</text>
+  <text x="1020" y="478" class="m" font-size="12">data/cache/&lt;niche&gt;.json</text>
+  <text x="1020" y="506" class="t" font-size="13">live once → demo forever</text>
+  <text x="1020" y="530" class="t" font-size="13">"Re-sequence live" refreshes</text>
+  <rect x="1000" y="580" width="240" height="140" rx="16" class="box"/>
+  <text x="1020" y="612" class="t" font-size="16" font-weight="700">Sample corpus</text>
+  <text x="1020" y="638" class="m" font-size="12">lib/sample.ts · seeded</text>
+  <text x="1020" y="666" class="t" font-size="13">only when no key is set,</text>
+  <text x="1020" y="690" class="t" font-size="13">labelled SAMPLE DATA in UI</text>
+
+  <!-- arrows -->
+  <path d="M290 235 H350" class="ln flow"/>
+  <path d="M600 235 H660" class="ln flow"/>
+  <path d="M800 360 C800 390 420 380 320 420" class="ln flow"/>
+  <path d="M600 570 H660" class="ln flow"/>
+  <path d="M940 490 H1000" class="ln"/>
+  <path d="M475 360 V420" class="ln"/>
+</svg>
