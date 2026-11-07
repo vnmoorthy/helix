@@ -17,7 +17,7 @@ export const GENES: GeneDef[] = [
   { id: "spoken.silent", label: "No voice", track: "spoken", blurb: "No speech — visuals, text and music carry it.", recipe: "Let visuals + on-screen text tell the story with zero voiceover." },
   { id: "cta.engage", label: "Spoken CTA", track: "spoken", blurb: "Asks to follow / comment / save / share.", recipe: "Close with one explicit ask: comment, save or follow." },
   // ON-SCREEN — frames[].onScreenTextRegions
-  { id: "text.hook", label: "Text hook in frame 1", track: "onscreen", blurb: "On-screen text visible in the first second.", recipe: "Burn a 3–6 word headline onto the very first frame." },
+  { id: "text.hook", label: "Text hook in first 3s", track: "onscreen", blurb: "On-screen text visible within the first 3 seconds.", recipe: "Burn a 3–6 word headline onto the opening frames." },
   { id: "text.captions", label: "Burned-in captions", track: "onscreen", blurb: "On-screen words mirror the spoken words.", recipe: "Add word-by-word captions that follow the voice." },
   { id: "text.heavy", label: "Text-heavy", track: "onscreen", blurb: "Text overlay on most frames.", recipe: "Keep a text layer on screen almost the entire time." },
   { id: "text.caps", label: "ALL-CAPS overlay", track: "onscreen", blurb: "Overlay set in capitals.", recipe: "Set the hook overlay in ALL CAPS." },
@@ -86,7 +86,7 @@ export function slim(c: Content): SlimVideo {
   const transcript = (m?.transcriptChunks || []).map((t) => ({ s: t.startSeconds, e: t.endSeconds, text: t.text }));
   if (!transcript.length && m?.transcript) transcript.push({ s: 0, e: m.duration || 0, text: m.transcript });
   const audioTitle = c.audioTitle || "";
-  const original = /original (sound|audio)|son original|sonido original|audio original/i.test(audioTitle) || (!!c.audioAuthor && c.audioAuthor.replace(/^@/, "").toLowerCase() === c.profileHandle.toLowerCase());
+  const original = c.audioType === "original" || /original (sound|audio)|son original|sonido original|audio original/i.test(audioTitle) || (!!c.audioAuthor && c.audioAuthor.replace(/^@/, "").toLowerCase() === c.profileHandle.toLowerCase());
   return {
     id: c.id,
     platform: c.platform,
@@ -159,7 +159,7 @@ export function extractGenes(v: SlimVideo, trendingTitles: Set<string>): GeneHit
     if (!withText.length) add("text.none", "No on-screen text in any sampled frame", "frames[].onScreenTextRegions");
     else {
       const f0 = withText[0];
-      if (f0.t <= 1.01) add("text.hook", `“${f0.texts.map((x) => x.text).join(" ").slice(0, 70)}” at ${f0.t.toFixed(1)}s`, "frames[].onScreenTextRegions", f0.t);
+      if (f0.t <= 3.01) add("text.hook", `“${f0.texts.map((x) => x.text).join(" ").slice(0, 70)}” at ${f0.t.toFixed(1)}s`, "frames[].onScreenTextRegions", f0.t);
       if (withText.length / fr.length >= 0.6) add("text.heavy", `Text on ${withText.length}/${fr.length} frames`, "frames[].onScreenTextRegions");
       const allTxt = withText.flatMap((f) => f.texts.map((x) => x.text)).join(" ");
       const caps = withText.flatMap((f) => f.texts).find((x) => x.text.length >= 6 && x.text === x.text.toUpperCase() && /[A-Z]/.test(x.text));
@@ -200,7 +200,7 @@ export function extractGenes(v: SlimVideo, trendingTitles: Set<string>): GeneHit
     const cur = visBest.get(vv.gene);
     if (!cur || vv.score > cur.score) visBest.set(vv.gene, { t: f.t, score: vv.score });
   }
-  for (const [gene, b] of visBest) add(gene, `AI Vision match ${(b.score * 100).toFixed(0)}% at ${b.t.toFixed(1)}s`, "frames[].visualSimilarityScore", b.t);
+  for (const [gene, b] of visBest) add(gene, `Matched AI-Vision probe “${VISUAL_PROBES.find((p) => p.gene === gene)?.text || gene}”`, "visualSimilarity search", b.t);
 
   return hits;
 }

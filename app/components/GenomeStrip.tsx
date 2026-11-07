@@ -28,8 +28,8 @@ export function VideoGenome({ v, stats, onClose, onFork }: { v: SlimVideo; stats
               <div className="text-sm text-muted mt-1 flex flex-wrap gap-x-4 gap-y-1">
                 <span><b className="text-ink">{fmt(v.views)}</b> views</span>
                 <span><b className="text-ink">{fmt(v.followers)}</b> followers</span>
-                <span><b className="text-lime">{v.vrf.toFixed(0)}%</b> views/follower</span>
-                <span><b className="text-ink">{v.er.toFixed(1)}%</b> engagement</span>
+                <span><b className="text-lime">{v.vrf >= 100 ? `${fmt(v.vrf / 100)}×` : `${v.vrf.toFixed(0)}%`}</b> views/follower</span>
+                <span><b className="text-ink">{v.er < 1 ? v.er.toFixed(2) : v.er.toFixed(1)}%</b> engagement</span>
                 <span><b className="text-ink">{v.duration.toFixed(0)}s</b></span>
               </div>
             </div>

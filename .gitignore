@@ -43,7 +43,6 @@ next-env.d.ts
 # helix
 .env*.local
 app/.env*
-app/data/assets.json
 .claude/
 !.env.example
 !app/.env.example

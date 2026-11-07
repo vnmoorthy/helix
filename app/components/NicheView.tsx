@@ -9,8 +9,8 @@ import { VideoGenome } from "./GenomeStrip";
 import { ForkPanel } from "./ForkPanel";
 
 const STEPS = [
-  "Querying Oriane: what's said, overlaid, captioned & seen",
-  "Pulling top videos by views + most recent",
+  "Querying Oriane: what's said, overlaid & captioned",
+  "Pulling the hits + the long tail, with frames, transcripts & OCR",
   "Running AI-Vision probes frame by frame",
   "Extracting 32 genes per video",
   "Measuring lift: with vs. without each gene",
@@ -34,7 +34,7 @@ export function NicheView({ q }: { q: string }) {
     setLoading(true);
     setErr("");
     setStep(0);
-    const iv = setInterval(() => setStep((s) => Math.min(STEPS.length - 1, s + 1)), 900);
+    const iv = setInterval(() => setStep((s) => Math.min(STEPS.length - 1, s + 1)), fresh ? 7000 : 600);
     try {
       const r = await fetch(`/api/niche?q=${encodeURIComponent(q)}${fresh ? "&fresh=1" : ""}`);
       const j = await r.json();
@@ -66,8 +66,7 @@ export function NicheView({ q }: { q: string }) {
   const byId = useMemo(() => new Map((data?.corpus || []).map((v) => [v.id, v])), [data]);
   const wall = useMemo(() => {
     if (!data) return [];
-    const metric = (v: SlimVideo) => (data.metric === "views/follower" ? v.vrf : v.views);
-    let vs = data.corpus.slice().sort((a, b) => metric(b) - metric(a));
+    let vs = data.corpus.slice().sort((a, b) => b.views - a.views);
     if (geneFilter) vs = vs.filter((v) => v.genes.some((g) => g.id === geneFilter));
     return vs.slice(0, 36);
   }, [data, geneFilter]);
@@ -159,7 +158,7 @@ export function NicheView({ q }: { q: string }) {
               <span className="text-xs mono text-muted">FOUND BY ORIANE SIGNAL →</span>
               <Sig icon={Mic} c={TRACK_COLOR.spoken} k="said" n={data.signalCounts.said} />
               <Sig icon={Type} c={TRACK_COLOR.onscreen} k="on-screen text" n={data.signalCounts.onscreen} />
-              <Sig icon={Eye} c={TRACK_COLOR.visual} k="seen (AI Vision)" n={data.signalCounts.seen} />
+              {data.signalCounts.seen > 0 && <Sig icon={Eye} c={TRACK_COLOR.visual} k="seen (AI Vision)" n={data.signalCounts.seen} />}
               <Sig icon={Hash} c={TRACK_COLOR.format} k="caption" n={data.signalCounts.caption} />
               <span className="text-muted">A caption-only tool would have found <b className="text-ink">{data.signalCounts.caption}</b> of these <b className="text-ink">{data.signalCounts.total}</b>.</span>
             </section>
@@ -237,7 +236,7 @@ export function NicheView({ q }: { q: string }) {
                         <span className="text-muted font-normal text-sm">· {activeGene.lift.toFixed(1)}× lift · {activeGene.share}% of niche</span>
                       </>
                     ) : (
-                      <>Top videos by {data.metric}</>
+                      <>Top videos by views</>
                     )}
                   </h3>
                   {geneFilter && <button onClick={() => setGeneFilter(null)} className="text-sm text-muted hover:text-ink">Clear filter ✕</button>}
@@ -250,7 +249,7 @@ export function NicheView({ q }: { q: string }) {
                           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
                           {!v.thumb && v.frames[0]?.texts[0] && <div className="absolute inset-x-3 top-[14%] text-[11px] font-bold text-white text-center bg-black/40 rounded px-1">{v.frames[0].texts[0].text}</div>}
                           <div className="absolute top-2 left-2 text-[10px] mono bg-black/60 rounded px-1.5 py-0.5">{v.platform === "tiktok" ? "TikTok" : v.platform === "instagram" ? "IG" : "YT"}</div>
-                          <div className="absolute top-2 right-2 text-[10px] mono bg-lime text-black rounded px-1.5 py-0.5 font-semibold">{v.vrf >= 100 ? `${(v.vrf / 100).toFixed(1)}×` : `${v.vrf.toFixed(0)}%`}</div>
+                          <div className="absolute top-2 right-2 text-[10px] mono bg-lime text-black rounded px-1.5 py-0.5 font-semibold">{v.vrf >= 100 ? `${fmt(v.vrf / 100)}× reach` : `${v.vrf.toFixed(0)}% reach`}</div>
                           <Play className="absolute inset-0 m-auto opacity-0 group-hover:opacity-90 transition" size={34} />
                           <div className="absolute bottom-0 inset-x-0 p-2.5">
                             <div className="text-sm font-semibold flex items-center gap-1">▶ {fmt(v.views)}</div>

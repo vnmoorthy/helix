@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // ship recorded live sequences + Oriane asset ids with the serverless functions
+  outputFileTracingIncludes: {
+    "/api/niche": ["./data/**/*"],
+    "/api/status": ["./data/**/*"],
+  },
+  images: { unoptimized: true },
   turbopack: {
     rules: {
       "*.css": {

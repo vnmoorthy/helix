@@ -86,12 +86,14 @@ export type Content = {
   audioTitle?: string;
   audioAuthor?: string;
   audioCopyrighted?: boolean;
+  audioType?: string;
   media?: Media[];
   popularComments?: { profileHandle: string; content: string; likesCount: number }[];
 };
 
 export type SearchResult = {
   data: Content[];
+  aggregations?: Record<string, number>;
   metadata: { requestId: string; executionTime: number; pagination?: { offset: number; limit: number; totalCount: number; aiSearchAnchor?: string } };
 };
 
@@ -144,7 +146,10 @@ export async function searchContents(
   if (opts.offset) qs.set("offset", String(opts.offset));
   if (opts.sort) qs.set("sort", opts.sort);
   qs.set("projection", opts.projection ?? "full");
-  return call<SearchResult>(`/rest/contents/search?${qs}`, query, key);
+  const raw = await call<{ data: Content[] | { results: Content[]; aggregations?: Record<string, number> }; metadata: SearchResult["metadata"] }>(`/rest/contents/search?${qs}`, query, key);
+  const list = Array.isArray(raw.data) ? raw.data : raw.data?.results || [];
+  const aggregations = Array.isArray(raw.data) ? undefined : raw.data?.aggregations;
+  return { data: list, metadata: raw.metadata, aggregations };
 }
 
 export async function createTextAsset(text: string, key?: string): Promise<string> {

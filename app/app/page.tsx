@@ -99,7 +99,7 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-24">
         <div className="card p-6 sm:p-10 grid md:grid-cols-3 gap-8">
           {[
-            { icon: Dna, t: "1 · Sequence", d: "Pull up to 200 videos for a niche from Oriane — found by what's said, shown, overlaid and captioned — and extract 30+ genes per video, each with a timestamp and source field." },
+            { icon: Dna, t: "1 · Sequence", d: "Pull the hits and the long tail of a niche from Oriane — found by what's said, overlaid and captioned, then probed by AI Vision — and extract 32 genes per video, each with a timestamp and source field." },
             { icon: BarChart3, t: "2 · Measure lift", d: "For every gene: median views-per-follower with vs. without it, and its share of top- vs. bottom-quartile videos. The winning genome is what the data says, not what a guru says." },
             { icon: GitFork, t: "3 · Fork", d: "Inherit the structure, never the content. Helix turns the winning genome into a 4-beat shot list for your product — or batch-forks it across your whole creator roster." },
           ].map((s) => (

@@ -15,7 +15,17 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-f2b5e3?style=for-the-badge&labelColor=111114)](LICENSE)
 [![Hack the Feed](https://img.shields.io/badge/Hack%20the%20Feed-Amplitude%20HQ%20·%20Nov%206%202026-fcd34d?style=for-the-badge&labelColor=111114)](https://luma.com/92iq2a12)
 
-[**Quickstart**](#-quickstart) · [**How it works**](#-how-it-works) · [**Architecture**](#-architecture) · [**The 32 genes**](#-the-gene-catalog) · [**Pitch deck**](deck/) · [**Why Helix**](#-why-this-exists)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvnmoorthy%2Fhelix&root-directory=app&env=ORIANE_API_KEY&envDescription=Oriane%20REST%20API%20key&envLink=https%3A%2F%2Fapp.oriane.xyz%2Fbilling%2Fsubscription%3Ftab%3Dapi&project-name=helix)
+[![CI](https://github.com/vnmoorthy/helix/actions/workflows/ci.yml/badge.svg)](https://github.com/vnmoorthy/helix/actions/workflows/ci.yml)
+[![GitHub stars](https://img.shields.io/github/stars/vnmoorthy/helix?style=social)](https://github.com/vnmoorthy/helix/stargazers)
+
+[**Quickstart**](#-quickstart) · [**Real findings**](#-real-findings-from-live-oriane-data) · [**How it works**](#-how-it-works) · [**Architecture**](#-architecture) · [**The 32 genes**](#-the-gene-catalog) · [**Pitch deck**](#-pitch-deck) · [**Why Helix**](#-why-this-exists)
+
+<br/>
+
+<img src="docs/demo.gif" alt="Helix walkthrough: sequence a niche, filter by gene, open a video genome, fork it into a shot list" width="92%"/>
+
+<sub>Sequence a niche → see the winning genome → filter by gene → open a 5-track video genome → fork it into a shot list. All on live Oriane data.</sub>
 
 </div>
 
@@ -27,12 +37,42 @@
 
 Type a niche — `protein coffee`, `ai tools`, `skincare routine` — and Helix:
 
-1. **Sequences it.** Pulls the top and the most recent videos for that niche from [Oriane](https://www.oriane.xyz)'s TikTok + Instagram index, found four different ways at once: by what's **said**, what's **written on screen**, what's **captioned**, and what's **seen** by AI Vision. For every video we know _how_ it was found, so Helix can tell you what share of the niche is invisible to caption-based tools.
+1. **Sequences it.** Pulls the hits and the long tail for that niche from [Oriane](https://www.oriane.xyz)'s TikTok + Instagram index. Videos are found three ways at once: by what's **said**, what's **written on screen**, and what's **captioned**. Six AI-Vision probes then tag what's **shown**. For every video we know _how_ it was found, so Helix can tell you what share of the niche is invisible to caption-based tools.
 2. **Extracts 32 genes per video** across five tracks — **Visual · Spoken · On-screen · Sound · Format**. Every gene carries a timestamp and the exact Oriane field it was read from. Nothing on screen is guessed by an LLM.
 3. **Measures lift.** For every gene: median views-per-follower _with_ vs _without_ it, plus its share of top-quartile vs bottom-quartile videos. The **winning genome** is the strongest lifting gene per track.
 4. **Forks it.** Turn the winning genome (or any single video's genome) into a 4-beat shot list — HOOK · SETUP · PROOF · CTA — that **inherits the structure and swaps every piece of content**. Or batch-fork it across your whole creator roster in one click.
 
 > **Structure, never content.** Songs share chord progressions; videos can share genomes. Helix never copies footage, words or music — it copies what works.
+
+---
+
+## 📊 Real findings from live Oriane data
+
+Sequenced live from Oriane's TikTok + Instagram index on **Nov 6 2026**:
+
+<table>
+<tr><td width="50%">
+
+**`protein coffee`** · 11,401 matching videos · 89 sequenced · 497M views
+
+| Gene | Lift | Top vs bottom quartile |
+|---|---|---|
+| ⏱ 30–60s length | **7.2×** | 59% vs 4% |
+| 🎵 Licensed music | **5.7×** | 18% vs 5% |
+| 📝 Long story caption | **4.2×** | 63% vs 21% |
+| 🔤 Text-heavy overlays | **3.4×** | 77% vs 45% |
+| 🗣 Contrarian hook | **1.8×** | 9% vs 5% |
+
+**84%** of these videos never mention "protein coffee" in their caption. They were found through what's **said** (32) or **written on screen** (70). A caption-only tool finds **14**.
+
+</td><td width="50%">
+
+<img src="docs/screens/niche.png" alt="protein coffee genome"/>
+
+</td></tr>
+</table>
+
+> Lift = median views-per-follower of videos **with** the gene ÷ **without** it. Correlation with receipts, not causation. Every fork is a testable hypothesis.
 
 ---
 
@@ -50,6 +90,16 @@ Click any video to open its genome: a five-track timeline of **frames** (with AI
 - **Agency roster:** paste `handle, product` for 5 or 50 creators → one proven genome becomes 50 Monday briefs. Export all as Markdown.
 - **Export:** copy as Markdown, download `.md`, or print.
 - **Optional LLM polish:** set `GMI_API_KEY` (GMI Cloud inference), `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` and Helix rewrites the spoken lines in the creator's voice **while keeping every gene fixed**. With no key it uses the deterministic template engine.
+
+---
+
+## 🎤 Pitch deck
+
+A 10-slide motion-graphics deck lives in [`deck/`](deck/):
+
+- **[`deck/index.html`](deck/index.html)**: present from the browser. Use ← → / Space to move, `F` for fullscreen and `N` for speaker notes with a timer.
+- **[`deck/helix-deck.pptx`](deck/helix-deck.pptx)**: the PowerPoint version, with transitions, entrance animations and speaker notes.
+- **[`docs/STORYBOARD.md`](docs/STORYBOARD.md)**: a word-for-word 3-minute pitch script with demo beats, plus Q&A prep.
 
 ---
 
@@ -72,6 +122,8 @@ No key yet? Helix still runs end to end on a seeded **sample corpus**, clearly l
 | `ANTHROPIC_API_KEY` / `ANTHROPIC_MODEL` | optional | LLM polish via Claude |
 | `OPENAI_API_KEY` | optional | LLM polish via OpenAI |
 
+**Deploy your own:** click **Deploy with Vercel** above (root directory `app`, set `ORIANE_API_KEY`), or run `bash app/scripts/deploy.sh`. The repo ships recorded live sequences for `protein coffee`, `ai tools` and more in `app/data/cache/`, so a fresh deployment opens real data instantly.
+
 **Deep links** (great for demos): `/g/protein%20coffee?video=top` opens the top video's genome · `?fork=1&product=oat-milk%20cold%20brew&creator=maya.lifts` opens a generated fork · `?gene=text.hook` filters the wall.
 
 ---
@@ -83,7 +135,7 @@ flowchart LR
     U([Creator / agency<br/>types a niche]) --> UI[Next.js UI]
     UI -->|GET /api/niche?q=| ENG[engine.ts]
     ENG -->|1 · contents/search<br/>OR of named sub-queries| OR[(Oriane API)]
-    OR -. said · onscreen · caption · seen .-> ENG
+    OR -. said · onscreen · caption .-> ENG
     ENG -->|2 · assets: text → vector| OR
     ENG -->|3 · AI-Vision probes<br/>id ∈ corpus| OR
     ENG --> GE[genes.ts<br/>32 extractors · 5 tracks]
@@ -96,13 +148,13 @@ flowchart LR
     ENG <--> C[(data/cache<br/>sequence cache)]
 ```
 
-### 1 · One query, four signals
-Helix sends **one** Oriane `contents/search` request whose root is an `or` of four **named** sub-queries — `said` (`transcript.includesFuzzy`), `onscreen` (`onScreenText.includesFuzzy`), `caption` (`caption.includesFuzzy`) and `seen` (`visualSimilarity` against a text asset of the niche). Oriane returns `matchedQueries` per video, so Helix knows _why_ each video is in the corpus. That powers the **"invisible to caption search"** KPI: the share of the niche a caption/hashtag tool would never find.
+### 1 · One query, three text signals
+Helix sends Oriane `contents/search` requests whose root is an `or` of **named** sub-queries: `said` (`transcript.includesFuzzy`), `onscreen` (`onScreenText.includesFuzzy`) and `caption` (`caption.includesFuzzy`). Oriane returns `matchedQueries` per video, so Helix knows _why_ each video is in the corpus. That powers the **"invisible to caption search"** KPI: the share of the niche that a caption/hashtag tool would never find.
 
-Two pages are pulled in parallel — `sort=viewsCount:desc` (the winners) and `sort=publishedAt:desc` (the long tail) — so lift is measured across the whole performance range, not just the hits.
+Two pages are pulled in parallel, both ranked by `viewsCount:desc` but far apart (rank 1–45 and rank 120–165). That covers the hits **and** the long tail with fully processed videos, so lift compares like with like. Videos Oriane hasn't processed yet (no frames, no transcript) are dropped before scoring, and only videos with 5K+ views from the last 12 months count.
 
 ### 2 · AI-Vision gene probes
-Six text assets (`face to camera`, `hands holding a product`, `screen recording`, `outdoors`, `bold text card`, `before/after split`) are created once and cached. For each, Helix runs a `visualSimilarity` search **restricted to the corpus IDs** (`id.includes`) and reads `frames[].visualSimilarityScore` to tag the visual gene on the exact frame.
+Six text assets (`face to camera`, `hands holding a product`, `screen recording`, `outdoors`, `bold text card`, `before/after split`) are created once and cached. For each one, Helix runs a `visualSimilarity` search **restricted to the corpus IDs** (`id.includes`, `minScore 0.12`), so each visual gene is tagged only on videos Oriane's vision model actually matched.
 
 ### 3 · Deterministic gene extraction
 `lib/genes.ts` turns each video into genes with evidence. Examples:
@@ -115,7 +167,7 @@ Six text assets (`face to camera`, `hands holding a product`, `screen recording`
 | Text hook in frame 1 | On-screen | `frames[].onScreenTextRegions` | “PROTEIN COFFEE HACK” at 0.0s |
 | Burned-in captions | On-screen | `onScreenText × transcript` | 78% of overlay words match speech |
 | Trending sound | Sound | `audioTitle` | “APT.” reused across this niche |
-| Hands + product | Visual | `frames[].visualSimilarityScore` | AI Vision 61% at 0.0s |
+| Hands + product | Visual | `visualSimilarity` probe | Matched “hands holding a product close to the camera” |
 | Under 10s | Format | `media.duration` | 8s |
 
 ### 4 · Lift, not vibes
@@ -211,6 +263,13 @@ Ten ideas were red-teamed by **100 judge-persona agents** modelled on the five H
 - [ ] Shot-boundary genes (cut pacing) once frame-level scene cuts are exposed
 - [ ] Oriane MCP server integration so agents can call `sequence_niche` / `fork_genome`
 - [ ] A/B tracking: did forked videos beat the creator's own median?
+
+## ⭐ Star history
+
+[![Star History Chart](https://api.star-history.com/svg?repos=vnmoorthy/helix&type=Date)](https://star-history.com/#vnmoorthy/helix&Date)
+
+## 🤝 Contributing
+New genes are the best contributions. See [CONTRIBUTING.md](CONTRIBUTING.md). The one rule: every gene must be read from an Oriane field and come with evidence.
 
 ## 🙏 Credits
 Built solo in one afternoon at **[Hack the Feed](https://luma.com/92iq2a12)** (Amplitude HQ, San Francisco, Nov 6 2026) on top of **[Oriane](https://www.oriane.xyz)** video intelligence, with thanks to **Lovable**, **GMI Cloud**, **Compound** and **Amplitude**.
