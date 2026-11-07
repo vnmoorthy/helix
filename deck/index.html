@@ -157,6 +157,7 @@ body{cursor:default;user-select:none}
 .q b{display:flex;align-items:center;gap:10px;font:600 19px/1 var(--mono)}
 .q small{display:block;font-size:16px;color:var(--muted);margin-top:8px}
 .prov{display:flex;height:16px;border-radius:8px;overflow:hidden;gap:3px;margin-top:16px}
+.provl{font:500 15px/1 var(--mono);color:var(--muted);margin-top:12px}
 .liftviz{display:flex;align-items:flex-end;gap:22px;height:190px}
 .lb{display:flex;flex-direction:column;align-items:center;gap:10px;font:500 16px/1 var(--mono);color:var(--muted)}
 .lb div{width:96px;border-radius:12px 12px 4px 4px}
@@ -258,21 +259,20 @@ body{cursor:default;user-select:none}
 
 /* ---------- S5 niche ---------- */
 .wg-col{position:absolute;left:1236px;top:92px;width:564px}
-.wg-strand{position:absolute;left:0;top:96px;width:60px;height:700px}
+.wg-strand{position:absolute;left:0;top:96px;width:60px;height:674px}
 .wg-strand path{fill:none;stroke-width:3}
 .slide.active .wg-strand path{stroke-dasharray:1600;animation:dash 2s var(--ease) both;animation-delay:1.6s}
 @keyframes dash{from{stroke-dashoffset:1600}to{stroke-dashoffset:0}}
-.wg-cards{position:absolute;left:76px;top:96px;width:488px;display:flex;flex-direction:column;gap:16px}
-.wg{position:relative;height:124px;padding:18px 22px;border-radius:18px;background:var(--panel);border:1px solid var(--border2)}
+.wg-cards{position:absolute;left:76px;top:96px;width:488px;display:flex;flex-direction:column;gap:12px}
+.wg{position:relative;height:86px;padding:14px 22px;border-radius:16px;background:var(--panel);border:1px solid var(--border2)}
 .wg::before{content:"";position:absolute;left:-52px;top:50%;width:52px;height:2px;background:var(--c);opacity:.7}
 .slide.active .wg{animation:fly 1.25s var(--ease) both;animation-delay:calc(var(--i) * 170ms + 450ms)}
 @keyframes fly{0%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(.86);filter:blur(6px)}55%{opacity:1;filter:blur(0)}100%{opacity:1;transform:none}}
-.wg .top{display:flex;align-items:center;gap:10px;font:500 15px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--c)}
-.wg .top .tdot{background:var(--c);box-shadow:0 0 12px var(--c)}
-.wg .lift{position:absolute;right:22px;top:16px;font-size:44px;font-weight:680;letter-spacing:-.04em;color:var(--ink)}
+.wg .lift{position:absolute;right:22px;top:18px;font-size:42px;font-weight:680;letter-spacing:-.04em;color:var(--ink)}
 .wg .lift small{font-size:24px;color:var(--muted);font-weight:500;margin-right:2px}
-.wg b{display:block;font-size:27px;font-weight:600;letter-spacing:-.02em;margin-top:12px}
-.wg .rc{font:500 15px/1 var(--mono);color:var(--muted);margin-top:8px}
+.wg b{display:block;font-size:25px;font-weight:600;letter-spacing:-.02em}
+.wg .rc{display:flex;align-items:center;gap:9px;font:500 14px/1 var(--mono);color:var(--muted);margin-top:10px;letter-spacing:.02em}
+.wg .rc .tdot{width:9px;height:9px;background:var(--c);box-shadow:0 0 10px var(--c)}
 .callouts{position:absolute;left:120px;top:932px;display:flex;gap:28px;font-size:21px;color:var(--muted)}
 .callouts span{display:flex;align-items:center;gap:10px}
 .callouts b{color:var(--ink);font-weight:560}
@@ -396,11 +396,11 @@ body{cursor:default;user-select:none}
       <span><i class="tdot" style="background:var(--snd)"></i>Sound</span>
       <span><i class="tdot" style="background:var(--fmt)"></i>Format</span>
     </div>
-    <div class="gtag rv s" style="--i:7;left:1090px;top:212px;color:var(--spk)"><i class="tdot" style="background:var(--spk)"></i><span style="color:var(--ink)">Question hook</span><em>@0:00</em></div>
-    <div class="gtag rv s" style="--i:8;left:1600px;top:372px;color:var(--ocr)"><i class="tdot" style="background:var(--ocr)"></i><span style="color:var(--ink)">Text hook · frame 1</span></div>
-    <div class="gtag rv s" style="--i:9;left:1060px;top:548px;color:var(--vis)"><i class="tdot" style="background:var(--vis)"></i><span style="color:var(--ink)">Hands + product</span><em>@0:01</em></div>
-    <div class="gtag rv s" style="--i:10;left:1610px;top:716px;color:var(--snd)"><i class="tdot" style="background:var(--snd)"></i><span style="color:var(--ink)">Trending sound</span></div>
-    <div class="gtag rv s" style="--i:11;left:1130px;top:884px;color:var(--fmt)"><i class="tdot" style="background:var(--fmt)"></i><span style="color:var(--ink)">9:16 · 21s · 8 cuts</span></div>
+    <div class="gtag rv s" style="--i:7;left:1090px;top:212px;color:var(--spk)"><i class="tdot" style="background:var(--spk)"></i><span style="color:var(--ink)">Contrarian hook</span></div>
+    <div class="gtag rv s" style="--i:8;left:1600px;top:372px;color:var(--ocr)"><i class="tdot" style="background:var(--ocr)"></i><span style="color:var(--ink)">Text-heavy</span></div>
+    <div class="gtag rv s" style="--i:9;left:1060px;top:548px;color:var(--vis)"><i class="tdot" style="background:var(--vis)"></i><span style="color:var(--ink)">Hands + product</span></div>
+    <div class="gtag rv s" style="--i:10;left:1610px;top:716px;color:var(--snd)"><i class="tdot" style="background:var(--snd)"></i><span style="color:var(--ink)">Licensed music</span></div>
+    <div class="gtag rv s" style="--i:11;left:1130px;top:884px;color:var(--fmt)"><i class="tdot" style="background:var(--fmt)"></i><span style="color:var(--ink)">30–60s length</span></div>
     <aside class="notes">Hi, I'm presenting Helix. Every viral video has a genome, and for the first time we can actually read it, because Oriane indexes what a video shows, says, puts on screen and sounds like.</aside>
   </section>
 
@@ -479,15 +479,16 @@ body{cursor:default;user-select:none}
       <div class="panel step rv" style="--i:2">
         <div class="n">01 · SEQUENCE</div>
         <h3>Sequence a niche</h3>
-        <p>Four named Oriane sub-queries, OR-ed. Every video knows how it was found.</p>
+        <p>Three named Oriane sub-queries, OR-ed. Every video knows how it was found.</p>
         <div class="viz">
           <div class="qgrid">
             <div class="q"><b><i class="tdot" style="background:var(--spk)"></i>said</b><small>transcript match</small></div>
             <div class="q"><b><i class="tdot" style="background:var(--ocr)"></i>onscreen</b><small>on-screen text match</small></div>
             <div class="q"><b><i class="tdot" style="background:#8b8b94"></i>caption</b><small>caption match</small></div>
-            <div class="q"><b><i class="tdot" style="background:var(--vis)"></i>seen</b><small>AI-Vision similarity</small></div>
+            <div class="q" style="border-style:dashed"><b><i class="tdot" style="background:var(--vis)"></i>AI Vision</b><small>6 visual gene probes</small></div>
           </div>
-          <div class="prov draw" style="--i:6"><div style="flex:31;background:var(--spk)"></div><div style="flex:17;background:var(--ocr)"></div><div style="flex:29;background:#5b5b64"></div><div style="flex:23;background:var(--vis)"></div></div>
+          <div class="prov draw" style="--i:6"><div style="flex:32;background:var(--spk)"></div><div style="flex:70;background:var(--ocr)"></div><div style="flex:14;background:#5b5b64"></div></div>
+          <div class="provl">live · protein coffee: said 32 · on-screen 70 · caption 14</div>
         </div>
       </div>
       <div class="panel step rv" style="--i:4">
@@ -496,8 +497,8 @@ body{cursor:default;user-select:none}
         <p>Median views-per-follower with the gene ÷ without, plus top- vs bottom-quartile share.</p>
         <div class="viz liftviz">
           <div class="lb"><div style="height:160px;background:var(--grad);animation-delay:1.1s"></div>with</div>
-          <div class="lb"><div style="height:66px;background:#34343c;animation-delay:1.25s"></div>without</div>
-          <div class="liftnum"><div class="v grad">×<span class="count" data-to="2.4" data-dec="1" data-delay="1100">2.4</span></div><small>example gene lift<br>shown with n + receipts</small></div>
+          <div class="lb"><div style="height:24px;background:#34343c;animation-delay:1.25s"></div>without</div>
+          <div class="liftnum"><div class="v grad">×<span class="count" data-to="7.2" data-dec="1" data-delay="1100">7.2</span></div><small>30–60s length · n=24<br>live · protein coffee</small></div>
         </div>
       </div>
       <div class="panel step rv" style="--i:6">
@@ -505,9 +506,9 @@ body{cursor:default;user-select:none}
         <h3>Fork the genome</h3>
         <p>Structure inherited, content original. A shot list you can film on Monday.</p>
         <div class="viz beats">
-          <div class="beat"><b style="color:var(--spk)">HOOK</b><span>Question + text card</span><em class="badge" style="background:var(--spk)">inherited</em></div>
-          <div class="beat"><b style="color:var(--vis)">SETUP</b><span>Hands + product</span><em class="badge" style="background:var(--vis)">inherited</em></div>
-          <div class="beat"><b style="color:var(--ocr)">PROOF</b><span>Before / after, price</span><em class="badge" style="background:var(--ocr)">inherited</em></div>
+          <div class="beat"><b style="color:var(--spk)">HOOK</b><span>Contrarian “you” hook</span><em class="badge" style="background:var(--spk)">inherited</em></div>
+          <div class="beat"><b style="color:var(--ocr)">SETUP</b><span>Text-heavy, 4–6 words</span><em class="badge" style="background:var(--ocr)">inherited</em></div>
+          <div class="beat"><b style="color:var(--vis)">PROOF</b><span>Hands + product, 30–60s</span><em class="badge" style="background:var(--vis)">inherited</em></div>
           <div class="beat"><b style="color:var(--fmt)">CTA</b><span>Your product + voice</span><em class="badge" style="background:#2a2a31;color:var(--ink)">swapped</em></div>
         </div>
       </div>
@@ -525,46 +526,46 @@ body{cursor:default;user-select:none}
       <div class="mbar"><i></i><i></i><i></i><span class="url">helix · niche / protein-coffee</span></div>
       <div class="shot" style="--cx:.075;--cw:.85;--cy:0">
         <div class="mock">
-          <div class="mk-h"><h5>protein coffee</h5><span class="mk-chip">LIVE SEQUENCE · 400 VIDEOS</span><span class="mk-btn">Fork winning genome →</span></div>
+          <div class="mk-h"><h5>protein coffee</h5><span class="mk-chip">ORIANE DATA · 89 VIDEOS</span><span class="mk-btn">Fork winning genome →</span></div>
           <div class="mk-kpis">
-            <div class="mk-kpi"><span class="mk-lab">Videos sequenced</span><b>400</b></div>
-            <div class="mk-kpi"><span class="mk-lab">Median views / follower</span><b>0.84</b></div>
-            <div class="mk-kpi"><span class="mk-lab">Genes measured</span><b>32</b></div>
-            <div class="mk-kpi"><span class="mk-lab">Invisible to caption search</span><b class="grad">41%</b></div>
+            <div class="mk-kpi"><span class="mk-lab">Videos sequenced</span><b>89</b></div>
+            <div class="mk-kpi"><span class="mk-lab">Median views</span><b>4.2M</b></div>
+            <div class="mk-kpi"><span class="mk-lab">Genes measured</span><b>29</b></div>
+            <div class="mk-kpi"><span class="mk-lab">Invisible to caption search</span><b class="grad">84%</b></div>
           </div>
           <div class="mk-prov"><span class="mk-lab">Signal provenance · how each video was found</span>
-            <div class="mk-pbar"><div style="flex:31;background:var(--spk)"></div><div style="flex:17;background:var(--ocr)"></div><div style="flex:23;background:var(--vis)"></div><div style="flex:29;background:#4a4a53"></div></div>
-            <div class="mk-leg"><span><i style="background:var(--spk)"></i>said 31%</span><span><i style="background:var(--ocr)"></i>onscreen 17%</span><span><i style="background:var(--vis)"></i>seen 23%</span><span><i style="background:#6a6a73"></i>caption 29%</span></div>
+            <div class="mk-pbar"><div style="flex:32;background:var(--spk)"></div><div style="flex:70;background:var(--ocr)"></div><div style="flex:14;background:#4a4a53"></div></div>
+            <div class="mk-leg"><span><i style="background:var(--spk)"></i>said 32</span><span><i style="background:var(--ocr)"></i>on-screen 70</span><span><i style="background:#6a6a73"></i>caption 14</span><span>a caption-only tool finds 14 of 89</span></div>
           </div>
           <div class="mk-wg">
-            <div class="mk-wc"><div class="t" style="color:var(--vis)"><i class="tdot" style="width:7px;height:7px;background:var(--vis)"></i>Visual</div><b>Hands + product</b><div class="l">×2.2</div></div>
-            <div class="mk-wc"><div class="t" style="color:var(--spk)"><i class="tdot" style="width:7px;height:7px;background:var(--spk)"></i>Spoken</div><b>Listicle hook</b><div class="l">×2.5</div></div>
-            <div class="mk-wc"><div class="t" style="color:var(--ocr)"><i class="tdot" style="width:7px;height:7px;background:var(--ocr)"></i>On-screen</div><b>Text hook frame 1</b><div class="l">×2.2</div></div>
-            <div class="mk-wc"><div class="t" style="color:var(--snd)"><i class="tdot" style="width:7px;height:7px;background:var(--snd)"></i>Sound</div><b>Trending sound</b><div class="l">×1.3</div></div>
-            <div class="mk-wc"><div class="t" style="color:var(--fmt)"><i class="tdot" style="width:7px;height:7px;background:var(--fmt)"></i>Format</div><b>Long caption</b><div class="l">×1.6</div></div>
+            <div class="mk-wc"><div class="t" style="color:var(--fmt)"><i class="tdot" style="width:7px;height:7px;background:var(--fmt)"></i>Format</div><b>30–60s length</b><div class="l">×7.2</div></div>
+            <div class="mk-wc"><div class="t" style="color:var(--snd)"><i class="tdot" style="width:7px;height:7px;background:var(--snd)"></i>Sound</div><b>Licensed music</b><div class="l">×5.7</div></div>
+            <div class="mk-wc"><div class="t" style="color:var(--fmt)"><i class="tdot" style="width:7px;height:7px;background:var(--fmt)"></i>Format</div><b>Long story caption</b><div class="l">×4.2</div></div>
+            <div class="mk-wc"><div class="t" style="color:var(--ocr)"><i class="tdot" style="width:7px;height:7px;background:var(--ocr)"></i>On-screen</div><b>Text-heavy</b><div class="l">×3.4</div></div>
+            <div class="mk-wc"><div class="t" style="color:var(--spk)"><i class="tdot" style="width:7px;height:7px;background:var(--spk)"></i>Spoken</div><b>Contrarian hook</b><div class="l">×1.8</div></div>
           </div>
           <div class="mk-body">
             <div class="mk-card"><span class="mk-lab">Gene leaderboard · lift</span>
               <div style="margin-top:8px">
-              <div class="mk-row"><i class="tdot" style="width:9px;height:9px;background:var(--vis)"></i>Hands + product in 2s<div class="bar"><u style="width:92%;background:var(--vis)"></u></div><span class="x">×2.6</span></div>
-              <div class="mk-row sel"><i class="tdot" style="width:9px;height:9px;background:var(--spk)"></i>Question hook<div class="bar"><u style="width:76%;background:var(--spk)"></u></div><span class="x">×2.1</span></div>
-              <div class="mk-row"><i class="tdot" style="width:9px;height:9px;background:var(--ocr)"></i>Text hook in frame 1<div class="bar"><u style="width:68%;background:var(--ocr)"></u></div><span class="x">×1.9</span></div>
-              <div class="mk-row"><i class="tdot" style="width:9px;height:9px;background:var(--vis)"></i>Before / after<div class="bar"><u style="width:62%;background:var(--vis)"></u></div><span class="x">×1.8</span></div>
-              <div class="mk-row"><i class="tdot" style="width:9px;height:9px;background:var(--snd)"></i>Trending sound<div class="bar"><u style="width:54%;background:var(--snd)"></u></div><span class="x">×1.6</span></div>
-              <div class="mk-row"><i class="tdot" style="width:9px;height:9px;background:var(--fmt)"></i>Under 20 seconds<div class="bar"><u style="width:46%;background:var(--fmt)"></u></div><span class="x">×1.4</span></div>
-              <div class="mk-row"><i class="tdot" style="width:9px;height:9px;background:var(--spk)"></i>Number claim<div class="bar"><u style="width:40%;background:var(--spk)"></u></div><span class="x">×1.3</span></div>
+              <div class="mk-row sel"><i class="tdot" style="width:9px;height:9px;background:var(--fmt)"></i>30–60s length<div class="bar"><u style="width:100%;background:var(--fmt)"></u></div><span class="x">×7.2</span></div>
+              <div class="mk-row"><i class="tdot" style="width:9px;height:9px;background:var(--snd)"></i>Licensed music<div class="bar"><u style="width:79%;background:var(--snd)"></u></div><span class="x">×5.7</span></div>
+              <div class="mk-row"><i class="tdot" style="width:9px;height:9px;background:var(--fmt)"></i>Long story caption<div class="bar"><u style="width:58%;background:var(--fmt)"></u></div><span class="x">×4.2</span></div>
+              <div class="mk-row"><i class="tdot" style="width:9px;height:9px;background:var(--ocr)"></i>Text-heavy<div class="bar"><u style="width:47%;background:var(--ocr)"></u></div><span class="x">×3.4</span></div>
+              <div class="mk-row"><i class="tdot" style="width:9px;height:9px;background:var(--spk)"></i>Contrarian hook<div class="bar"><u style="width:25%;background:var(--spk)"></u></div><span class="x">×1.8</span></div>
+              <div class="mk-row"><i class="tdot" style="width:9px;height:9px;background:var(--spk)"></i>Direct ‘you’ hook<div class="bar"><u style="width:19%;background:var(--spk)"></u></div><span class="x">×1.4</span></div>
+              <div class="mk-row"><i class="tdot" style="width:9px;height:9px;background:var(--vis)"></i>Hands + product<div class="bar"><u style="width:18%;background:var(--vis)"></u></div><span class="x">×1.3</span></div>
               </div>
             </div>
-            <div class="mk-card"><span class="mk-lab">Video wall · filtered: question hook</span>
+            <div class="mk-card"><span class="mk-lab">Video wall · filtered: 30–60s length</span>
               <div class="mk-wall">
-                <div class="thumb" style="--tc:#4b4a2a;--fx:40%"><div class="face"></div><div class="ocr">WHY IT TASTES LIKE CHALK</div><span class="vw">2.4M</span><span class="gn"><i style="background:var(--spk)"></i><i style="background:var(--ocr)"></i></span></div>
-                <div class="thumb" style="--tc:#4a2a44;--fx:60%"><div class="cup"></div><div class="ocr">I TESTED 6</div><span class="vw">1.1M</span><span class="gn"><i style="background:var(--spk)"></i><i style="background:var(--vis)"></i></span></div>
-                <div class="thumb" style="--tc:#2a3d4a"><div class="face"></div><div class="cup"></div><span class="vw">860K</span><span class="gn"><i style="background:var(--spk)"></i></span></div>
-                <div class="thumb" style="--tc:#3d3a2a;--fy:60%"><div class="ocr">30G · $1.80</div><div class="cup"></div><span class="vw">740K</span><span class="gn"><i style="background:var(--spk)"></i><i style="background:var(--snd)"></i></span></div>
-                <div class="thumb" style="--tc:#2a4a33;--fx:30%"><div class="face"></div><span class="vw">610K</span><span class="gn"><i style="background:var(--spk)"></i></span></div>
-                <div class="thumb" style="--tc:#44302a"><div class="ocr">STOP DOING THIS</div><div class="face"></div><span class="vw">520K</span><span class="gn"><i style="background:var(--spk)"></i><i style="background:var(--ocr)"></i></span></div>
-                <div class="thumb" style="--tc:#352a4a;--fx:70%"><div class="cup"></div><span class="vw">470K</span><span class="gn"><i style="background:var(--spk)"></i><i style="background:var(--vis)"></i></span></div>
-                <div class="thumb" style="--tc:#2a2a4a"><div class="face"></div><div class="ocr">DAY 14</div><span class="vw">390K</span><span class="gn"><i style="background:var(--spk)"></i></span></div>
+                <div class="thumb" style="--tc:#4b4a2a;--fx:40%"><div class="face"></div><div class="ocr">WHY IT TASTES LIKE CHALK</div><span class="gn"><i style="background:var(--spk)"></i><i style="background:var(--ocr)"></i></span></div>
+                <div class="thumb" style="--tc:#4a2a44;--fx:60%"><div class="cup"></div><div class="ocr">I TESTED 6</div><span class="gn"><i style="background:var(--spk)"></i><i style="background:var(--vis)"></i></span></div>
+                <div class="thumb" style="--tc:#2a3d4a"><div class="face"></div><div class="cup"></div><span class="gn"><i style="background:var(--spk)"></i></span></div>
+                <div class="thumb" style="--tc:#3d3a2a;--fy:60%"><div class="ocr">30G · $1.80</div><div class="cup"></div><span class="gn"><i style="background:var(--spk)"></i><i style="background:var(--snd)"></i></span></div>
+                <div class="thumb" style="--tc:#2a4a33;--fx:30%"><div class="face"></div><span class="gn"><i style="background:var(--spk)"></i></span></div>
+                <div class="thumb" style="--tc:#44302a"><div class="ocr">STOP DOING THIS</div><div class="face"></div><span class="gn"><i style="background:var(--spk)"></i><i style="background:var(--ocr)"></i></span></div>
+                <div class="thumb" style="--tc:#352a4a;--fx:70%"><div class="cup"></div><span class="gn"><i style="background:var(--spk)"></i><i style="background:var(--vis)"></i></span></div>
+                <div class="thumb" style="--tc:#2a2a4a"><div class="face"></div><div class="ocr">DAY 14</div><span class="gn"><i style="background:var(--spk)"></i></span></div>
               </div>
             </div>
           </div>
@@ -574,24 +575,26 @@ body{cursor:default;user-select:none}
     </div>
     <div class="wg-col">
       <div class="eyebrow rv" style="--i:2"><i></i>Winning genome</div>
-      <div class="rv f" style="--i:3;font-size:24px;color:var(--muted);margin-top:16px;letter-spacing:-.01em">Strongest-lifting gene on each track</div>
+      <div class="rv f" style="--i:3;font-size:24px;color:var(--muted);margin-top:16px;letter-spacing:-.01em">Live from Oriane · top genes by lift</div>
       <svg class="wg-strand" viewBox="0 0 60 700" preserveAspectRatio="none"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4f56a"/><stop offset=".5" stop-color="#f6d7a7"/><stop offset="1" stop-color="#f2b5e3"/></linearGradient></defs>
         <path d="M30 0 C 58 35, 58 105, 30 140 S 2 245, 30 280 S 58 385, 30 420 S 2 525, 30 560 S 58 665, 30 700" stroke="url(#sg)"/>
         <path d="M30 0 C 2 35, 2 105, 30 140 S 58 245, 30 280 S 2 385, 30 420 S 58 525, 30 560 S 2 665, 30 700" stroke="url(#sg)" opacity=".45"/>
       </svg>
       <div class="wg-cards">
-        <div class="wg" style="--i:0;--c:var(--vis);--x:-520px;--y:-120px;--r:-14deg"><div class="top"><i class="tdot"></i>Visual</div><div class="lift"><small>×</small><span class="count" data-to="2.2" data-dec="1" data-delay="1300">2.2</span></div><b>Hands + product</b><div class="rc">AI Vision probe · 62% top / 14% bottom</div></div>
-        <div class="wg" style="--i:1;--c:var(--spk);--x:360px;--y:-60px;--r:11deg"><div class="top"><i class="tdot"></i>Spoken</div><div class="lift"><small>×</small><span class="count" data-to="2.5" data-dec="1" data-delay="1470">2.5</span></div><b>Listicle hook</b><div class="rc">transcriptChunks[0] · 38% top / 10% bottom</div></div>
-        <div class="wg" style="--i:2;--c:var(--ocr);--x:-600px;--y:60px;--r:8deg"><div class="top"><i class="tdot"></i>On-screen</div><div class="lift"><small>×</small><span class="count" data-to="2.2" data-dec="1" data-delay="1640">2.2</span></div><b>Text hook in frame 1</b><div class="rc">onScreenTextRegions · 76% top / 52% bottom</div></div>
-        <div class="wg" style="--i:3;--c:var(--snd);--x:300px;--y:160px;--r:-12deg"><div class="top"><i class="tdot"></i>Sound</div><div class="lift"><small>×</small><span class="count" data-to="1.3" data-dec="1" data-delay="1810">1.3</span></div><b>Trending sound</b><div class="rc">audioTitle · 33% top / 29% bottom</div></div>
-        <div class="wg" style="--i:4;--c:var(--fmt);--x:-380px;--y:260px;--r:15deg"><div class="top"><i class="tdot"></i>Format</div><div class="lift"><small>×</small><span class="count" data-to="1.6" data-dec="1" data-delay="1980">1.6</span></div><b>Long caption</b><div class="rc">caption · 38% of top quartile</div></div>
+        <div class="wg" style="--i:0;--c:var(--fmt);--x:-520px;--y:-120px;--r:-14deg"><b>30–60s length</b><div class="rc"><i class="tdot"></i>FORMAT · media.duration · n=24</div><div class="lift"><small>×</small><span class="count" data-to="7.2" data-dec="1" data-delay="1300">7.2</span></div></div>
+        <div class="wg" style="--i:1;--c:var(--snd);--x:360px;--y:-60px;--r:11deg"><b>Licensed music</b><div class="rc"><i class="tdot"></i>SOUND · audioTitle / audioAuthor</div><div class="lift"><small>×</small><span class="count" data-to="5.7" data-dec="1" data-delay="1450">5.7</span></div></div>
+        <div class="wg" style="--i:2;--c:var(--fmt);--x:-600px;--y:40px;--r:8deg"><b>Long story caption</b><div class="rc"><i class="tdot"></i>FORMAT · caption</div><div class="lift"><small>×</small><span class="count" data-to="4.2" data-dec="1" data-delay="1600">4.2</span></div></div>
+        <div class="wg" style="--i:3;--c:var(--ocr);--x:300px;--y:120px;--r:-12deg"><b>Text-heavy</b><div class="rc"><i class="tdot"></i>ON-SCREEN · frames[].onScreenTextRegions</div><div class="lift"><small>×</small><span class="count" data-to="3.4" data-dec="1" data-delay="1750">3.4</span></div></div>
+        <div class="wg" style="--i:4;--c:var(--spk);--x:-380px;--y:200px;--r:15deg"><b>Contrarian hook</b><div class="rc"><i class="tdot"></i>SPOKEN · transcriptChunks[0]</div><div class="lift"><small>×</small><span class="count" data-to="1.8" data-dec="1" data-delay="1900">1.8</span></div></div>
+        <div class="wg" style="--i:5;--c:var(--spk);--x:340px;--y:260px;--r:-9deg"><b>Direct ‘you’ hook</b><div class="rc"><i class="tdot"></i>SPOKEN · transcriptChunks[0]</div><div class="lift"><small>×</small><span class="count" data-to="1.4" data-dec="1" data-delay="2050">1.4</span></div></div>
+        <div class="wg" style="--i:6;--c:var(--vis);--x:-460px;--y:320px;--r:12deg"><b>Hands + product</b><div class="rc"><i class="tdot"></i>VISUAL · AI-Vision probe</div><div class="lift"><small>×</small><span class="count" data-to="1.3" data-dec="1" data-delay="2200">1.3</span></div></div>
       </div>
     </div>
     <div class="callouts rv f" style="--i:8">
-      <span><i class="tdot" style="background:var(--lime)"></i><b>Provenance bar:</b>&nbsp;how much of the niche caption search misses</span>
+      <span><i class="tdot" style="background:var(--lime)"></i><b>84% invisible to caption search:</b>&nbsp;a caption-only tool finds 14 of 89</span>
       <span><i class="tdot" style="background:var(--pink)"></i><b>Click a gene</b>&nbsp;→ the wall filters to videos carrying it</span>
     </div>
-    <aside class="notes">Here's the "protein coffee" niche, sequenced. Four named Oriane sub-queries (said, on-screen, caption and seen) tell us how every video was found, and how much of the niche a caption-only tool would have missed. The leaderboard ranks every gene by lift, and clicking one filters the wall to the videos carrying it. The winning genome is the strongest gene on each track, shown with top- versus bottom-quartile share.</aside>
+    <aside class="notes">Here's "protein coffee", sequenced live from Oriane: 89 videos out of 11,401 matches in the index. Three named sub-queries (said, on-screen text and caption) tell us how each video was found, and 84 percent of them a caption-only tool would never see: captions surface just 14 of the 89. The leaderboard ranks every gene by lift; the top one is a 30-to-60-second length at 7.2x, with n of 24. Click a gene and the wall filters to the videos carrying it.</aside>
   </section>
 
   <!-- ================= 6 VIDEO GENOME ================= -->
@@ -600,15 +603,15 @@ body{cursor:default;user-select:none}
       <div class="eyebrow rv" style="--i:0"><i></i>Live demo · 2 / 3</div>
       <h2 class="h2 rv" style="--i:1">The Video<br>Genome</h2>
       <p class="lead rv" style="--i:2;margin-top:24px;font-size:26px">Five tracks on one timeline. Every gene ships with its receipt.</p>
-      <div class="rcpt rv l" style="--i:4"><b><i class="tdot" style="background:var(--spk)"></i>Listicle hook</b><code><em>transcriptChunks[0]</em> @0:00 · “…3 things…”</code></div>
-      <div class="rcpt rv l" style="--i:5"><b><i class="tdot" style="background:var(--ocr)"></i>Text hook in frame 1</b><code><em>frames[].onScreenTextRegions</em> @0:00 · polygon</code></div>
-      <div class="rcpt rv l" style="--i:6"><b><i class="tdot" style="background:var(--snd)"></i>Original audio</b><code><em>audioTitle / audioAuthor</em> · original sound</code></div>
+      <div class="rcpt rv l" style="--i:4"><b><i class="tdot" style="background:var(--ocr)"></i>Text hook in first 3s</b><code><em>frames[].onScreenTextRegions</em> @0:02 · “SANTE” · 2.1× in niche</code></div>
+      <div class="rcpt rv l" style="--i:5"><b><i class="tdot" style="background:var(--vis)"></i>Hands + product</b><code><em>AI-Vision probe</em> @0:02 · 1.3× in niche</code></div>
+      <div class="rcpt rv l" style="--i:6"><b><i class="tdot" style="background:var(--fmt)"></i>Long caption</b><code><em>caption</em> · 344 chars · 4.2× in niche</code></div>
     </div>
     <div class="frame rv s" style="--i:2;left:680px;top:150px;width:1120px;height:790px">
       <div class="mbar"><i></i><i></i><i></i><span class="url">helix · video / genome</span></div>
       <div class="shot" style="--cx:.14;--cw:.72;--cy:.03">
         <div class="mock">
-          <div class="mk-h"><h5>“Why does your protein coffee taste like chalk?”</h5><span class="mk-chip" style="margin-left:auto">1.2M VIEWS</span><span class="mk-chip">14.3 VIEWS / FOLLOWER</span><span class="mk-chip" style="color:var(--lime);border-color:rgba(228,245,106,.4)">TOP QUARTILE</span></div>
+          <div class="mk-h"><h5>@juhayna.everyday</h5><span class="mk-chip" style="margin-left:auto">13.7M VIEWS</span><span class="mk-chip">11K FOLLOWERS</span><span class="mk-chip">25S · INSTAGRAM</span></div>
           <div class="mg-body">
             <div class="mg-tl">
               <div class="mg-rul"><span>0:00</span><span>0:04</span><span>0:08</span><span>0:12</span><span>0:16</span><span>0:20</span><span>0:24</span></div>
@@ -625,28 +628,28 @@ body{cursor:default;user-select:none}
                 </div>
               </div>
               <div class="mg-lane"><b><i class="tdot" style="width:7px;height:7px;background:var(--spk)"></i>Spoken</b>
-                <div class="mg-tr"><div class="seg" style="left:0;width:15%;background:var(--spk)">Why does your…</div><div class="seg" style="left:17%;width:24%;background:var(--spk)">I tested 6 brands so…</div><div class="seg" style="left:44%;width:30%;background:var(--spk)">This one has 30g and tastes…</div><div class="seg" style="left:86%;width:14%;background:var(--spk)">Link in bio</div></div>
+                <div class="mg-tr"><div class="seg" style="left:0;width:100%;background:var(--spk)">I'm out.</div></div>
               </div>
               <div class="mg-lane"><b><i class="tdot" style="width:7px;height:7px;background:var(--ocr)"></i>On-screen</b>
-                <div class="mg-tr"><div class="seg o" style="left:0;width:20%">WHY IT TASTES…</div><div class="seg o" style="left:24%;width:17%">6 TESTED</div><div class="seg o" style="left:46%;width:18%">30G · $1.80</div><div class="seg o" style="left:70%;width:16%">#1 PICK</div></div>
+                <div class="mg-tr"><div class="seg o" style="left:9%;width:8%">SANTE</div><div class="seg o" style="left:23%;width:4%">AUT</div><div class="seg o" style="left:31%;width:4%">Juha</div><div class="seg o" style="left:43%;width:4%">25G</div><div class="seg o" style="left:52%;width:16%">SAINTS</div></div>
               </div>
               <div class="mg-lane"><b><i class="tdot" style="width:7px;height:7px;background:var(--snd)"></i>Sound</b>
                 <div class="mg-tr"><div class="mg-wave" id="mgwave"></div></div>
               </div>
               <div class="mg-lane"><b><i class="tdot" style="width:7px;height:7px;background:var(--fmt)"></i>Format</b>
-                <div class="mg-tr" id="mgfmt"><div class="seg" style="left:0;width:100%;background:rgba(196,181,253,.10);color:var(--fmt);border:1px solid rgba(196,181,253,.35)">9:16 · 24s · 9 cuts · loop ending</div></div>
+                <div class="mg-tr" id="mgfmt"><div class="seg" style="left:0;width:100%;background:rgba(196,181,253,.10);color:var(--fmt);border:1px solid rgba(196,181,253,.35)">25s · 0 hashtags · long caption (344 chars)</div></div>
               </div>
             </div>
-            <div class="mg-genes"><span class="mk-lab">Genes · 11 found</span>
+            <div class="mg-genes"><span class="mk-lab">Genes · 9 detected</span>
               <div style="margin-top:6px">
-                <div class="mg-g"><b><i style="background:var(--spk)"></i>Question hook</b><small>transcriptChunks[0] @0:00</small></div>
-                <div class="mg-g"><b><i style="background:var(--ocr)"></i>Text hook in frame 1</b><small>onScreenTextRegions @0:00</small></div>
-                <div class="mg-g"><b><i style="background:var(--vis)"></i>Face to camera</b><small>AI Vision probe @0:00</small></div>
-                <div class="mg-g"><b><i style="background:var(--vis)"></i>Hands + product</b><small>AI Vision probe @0:03</small></div>
-                <div class="mg-g"><b><i style="background:var(--spk)"></i>Number claim</b><small>transcriptChunks[1] @0:04</small></div>
-                <div class="mg-g"><b><i style="background:var(--ocr)"></i>Price overlay</b><small>onScreenTextRegions @0:11</small></div>
-                <div class="mg-g"><b><i style="background:var(--snd)"></i>Trending sound</b><small>audioTitle</small></div>
-                <div class="mg-g"><b><i style="background:var(--fmt)"></i>Under 25 seconds</b><small>duration · 24s</small></div>
+                <div class="mg-g"><b><i style="background:var(--ocr)"></i>Text hook in first 3s</b><small>onScreenTextRegions @0:02 · 2.1×</small></div>
+                <div class="mg-g"><b><i style="background:var(--ocr)"></i>Text-heavy</b><small>20/29 frames · 3.4×</small></div>
+                <div class="mg-g"><b><i style="background:var(--fmt)"></i>Long caption</b><small>caption · 344 chars · 4.2×</small></div>
+                <div class="mg-g"><b><i style="background:var(--fmt)"></i>10–30s</b><small>media.duration · 2.0×</small></div>
+                <div class="mg-g"><b><i style="background:var(--spk)"></i>No voice</b><small>media.transcript · 1.4×</small></div>
+                <div class="mg-g"><b><i style="background:var(--vis)"></i>Hands + product</b><small>AI-Vision probe @0:02 · 1.3×</small></div>
+                <div class="mg-g"><b><i style="background:var(--ocr)"></i>ALL-CAPS overlay</b><small>onScreenTextRegions.text · 1.0×</small></div>
+                <div class="mg-g"><b><i style="background:var(--snd)"></i>Original audio</b><small>audioTitle / audioAuthor · 0.2×</small></div>
               </div>
             </div>
           </div>
@@ -654,7 +657,7 @@ body{cursor:default;user-select:none}
         <img src="../docs/screens/genome.png" alt="Helix Video Genome strip" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()">
       </div>
     </div>
-    <aside class="notes">Open any video and you get its genome strip: frames, transcript chunks, on-screen text drawn as polygons right on the frames, the sound, and the format. Every gene carries a timestamp and the Oriane field it came from. These are receipts, not vibes.</aside>
+    <aside class="notes">Open any video and you get its genome strip: frames, transcript chunks, on-screen text drawn as polygons right on the frames, the sound, and the format. This Instagram post did 13.7 million views on 11 thousand followers, and every gene carries a timestamp and the Oriane field it came from. These are receipts, not vibes.</aside>
   </section>
 
   <!-- ================= 7 FORK + ROSTER ================= -->
@@ -665,34 +668,34 @@ body{cursor:default;user-select:none}
       <div class="mbar"><i></i><i></i><i></i><span class="url">helix · fork</span></div>
       <div class="shot" style="--cx:.10;--cw:.80;--cy:.03">
         <div class="mock">
-          <div class="mk-h"><h5>Fork → Oat protein latte</h5><span class="mk-chip" style="color:var(--lime);border-color:rgba(228,245,106,.4)">PREDICTED GENOME LIFT ×2.1</span><span class="mk-btn ghost" style="margin-left:auto">Export .md</span><span class="mk-btn ghost">Print</span></div>
-          <div class="mf-banner"><b>Structure inherited, content original.</b>genome: protein coffee · winning genome (5 genes)</div>
+          <div class="mk-h"><h5>Fork → oat-milk cold brew</h5><span class="mk-chip" style="color:var(--lime);border-color:rgba(228,245,106,.4)">GENOME LIFT SCORE ×9.9 · A PRIOR, NOT A PROMISE</span><span class="mk-btn ghost" style="margin-left:auto">Export .md</span><span class="mk-btn ghost">Print</span></div>
+          <div class="mf-banner"><b>Structure inherited, content original.</b>genome: protein coffee · winning genome (7 genes)</div>
           <div class="mf-tbl">
             <div class="mf-th"><span>Beat</span><span>Shot</span><span>Say</span><span>On-screen · sound</span></div>
-            <div class="mf-tr"><div class="bt" style="color:var(--spk)">HOOK<small>0–2s</small></div><div class="c">Face to camera, cup in frame</div><div class="c say">“Why does every oat latte taste like cardboard?”</div><div class="c ocrc">WHY IT TASTES LIKE CARDBOARD<br><span style="color:var(--snd);font-weight:500">♪ trending sound</span></div>
-              <div class="bdg"><span class="badge" style="background:var(--spk)">question hook</span><span class="badge" style="background:var(--ocr)">text hook f1</span><span class="badge" style="background:var(--vis)">face to camera</span><span class="sw">content swapped</span></div></div>
-            <div class="mf-tr"><div class="bt" style="color:var(--vis)">SETUP<small>2–7s</small></div><div class="c">Hands + product, five cartons on the counter</div><div class="c say">“I tried five so you don't have to.”</div><div class="c ocrc">5 TESTED</div>
-              <div class="bdg"><span class="badge" style="background:var(--vis)">hands + product</span><span class="badge" style="background:var(--spk)">number claim</span><span class="sw">content swapped</span></div></div>
-            <div class="mf-tr"><div class="bt" style="color:var(--ocr)">PROOF<small>7–18s</small></div><div class="c">Before / after pour, macro label close-up</div><div class="c say">“This one: 20 grams of protein, zero chalk.”</div><div class="c ocrc">20G · $2.10</div>
-              <div class="bdg"><span class="badge" style="background:var(--vis)">before / after</span><span class="badge" style="background:var(--ocr)">price overlay</span><span class="sw">content swapped</span></div></div>
-            <div class="mf-tr"><div class="bt" style="color:var(--fmt)">CTA<small>18–20s</small></div><div class="c">Back to face, loop to frame 1</div><div class="c say">“It's linked in my bio.”</div><div class="c ocrc">#1 PICK</div>
-              <div class="bdg"><span class="badge" style="background:var(--spk)">cta · link in bio</span><span class="badge" style="background:var(--fmt)">under 20s · loop</span><span class="sw">content swapped</span></div></div>
+            <div class="mf-tr"><div class="bt" style="color:var(--spk)">HOOK<small>0–2s</small></div><div class="c">Extreme close-up: hands bring the cold brew into frame</div><div class="c say">“Stop buying oat-milk cold brew until you've seen this.”</div><div class="c ocrc">OAT-MILK COLD BREW — THE HONEST TRUTH<br><span style="color:var(--snd);font-weight:500">♪ licensed track under voice</span></div>
+              <div class="bdg"><span class="badge" style="background:var(--spk)">contrarian hook</span><span class="badge" style="background:var(--spk)">direct ‘you’ hook</span><span class="badge" style="background:var(--vis)">hands + product</span><span class="sw">content swapped</span></div></div>
+            <div class="mf-tr"><div class="bt" style="color:var(--ocr)">SETUP<small>2–18s</small></div><div class="c">Medium shot, you + the cold brew; one jump cut per sentence</div><div class="c say">“Here's the thing most people miss about oat-milk cold brew.”</div><div class="c ocrc">KEY POINT AS TEXT, 4–6 WORDS</div>
+              <div class="bdg"><span class="badge" style="background:var(--ocr)">text-heavy</span><span class="sw">content swapped</span></div></div>
+            <div class="mf-tr"><div class="bt" style="color:var(--vis)">PROOF<small>18–35s</small></div><div class="c">Close-up demo in hand, the moment the result is visible</div><div class="c say">“Watch — this is the difference.”</div><div class="c ocrc">RESULT CALLED OUT ON SCREEN</div>
+              <div class="bdg"><span class="badge" style="background:var(--vis)">hands + product</span><span class="badge" style="background:var(--fmt)">30–60s</span><span class="sw">content swapped</span></div></div>
+            <div class="mf-tr"><div class="bt" style="color:var(--snd)">CTA<small>35–42s</small></div><div class="c">Back to face cam, lean in for the ask</div><div class="c say">“That's it. Try it and tell me.”</div><div class="c ocrc">—</div>
+              <div class="bdg"><span class="badge" style="background:var(--snd)">licensed music</span><span class="sw">content swapped</span></div></div>
           </div>
         </div>
         <img src="../docs/screens/fork.png" alt="Helix Fork shot list" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()">
       </div>
     </div>
     <div class="panel roster rv" style="--i:3">
-      <h4>Agency roster mode</h4>
+      <h4>Agency roster mode <span class="mk-chip" style="font-size:13px">EXAMPLE ROSTER</span></h4>
       <div class="sub">Paste 5–50 creators + products → one proven genome → a Monday brief for everyone.</div>
-      <div class="rrow" style="--i:0"><div class="av" style="background:var(--vis)">01</div><div><b>Creator 01</b><small>Oat protein latte</small></div><span class="ok">✓ brief ready</span></div>
-      <div class="rrow" style="--i:1"><div class="av" style="background:var(--spk)">02</div><div><b>Creator 02</b><small>Matcha whey shake</small></div><span class="ok">✓ brief ready</span></div>
-      <div class="rrow" style="--i:2"><div class="av" style="background:var(--ocr)">03</div><div><b>Creator 03</b><small>Cold brew + collagen</small></div><span class="ok">✓ brief ready</span></div>
-      <div class="rrow" style="--i:3"><div class="av" style="background:var(--snd)">04</div><div><b>Creator 04</b><small>Mocha protein bar</small></div><span class="ok">✓ brief ready</span></div>
-      <div class="rrow" style="--i:4"><div class="av" style="background:var(--fmt)">05</div><div><b>Creator 05</b><small>Vanilla cold foam</small></div><span class="ok">✓ brief ready</span></div>
+      <div class="rrow" style="--i:0"><div class="av" style="background:var(--vis)">01</div><div><b>Example creator 01</b><small>Oat protein latte</small></div><span class="ok">✓ brief ready</span></div>
+      <div class="rrow" style="--i:1"><div class="av" style="background:var(--spk)">02</div><div><b>Example creator 02</b><small>Matcha whey shake</small></div><span class="ok">✓ brief ready</span></div>
+      <div class="rrow" style="--i:2"><div class="av" style="background:var(--ocr)">03</div><div><b>Example creator 03</b><small>Cold brew + collagen</small></div><span class="ok">✓ brief ready</span></div>
+      <div class="rrow" style="--i:3"><div class="av" style="background:var(--snd)">04</div><div><b>Example creator 04</b><small>Mocha protein bar</small></div><span class="ok">✓ brief ready</span></div>
+      <div class="rrow" style="--i:4"><div class="av" style="background:var(--fmt)">05</div><div><b>Example creator 05</b><small>Vanilla cold foam</small></div><span class="ok">✓ brief ready</span></div>
       <div class="rfoot"><div class="n"><span class="grad count" data-to="50" data-delay="2300" data-dur="1400">50</span><small>Monday briefs</small></div><span class="btn">Batch fork →</span></div>
     </div>
-    <aside class="notes">Fork turns the winning genome into a four-beat shot list (hook, setup, proof, CTA) with the inherited genes badged and the content swapped for yours. Agencies paste their roster, up to fifty creators and products, and get fifty Monday briefs in one click.</aside>
+    <aside class="notes">Fork turns the winning genome into a four-beat shot list (hook, setup, proof, CTA) with the inherited genes badged and the content swapped for yours. The lift score is a prior, not a promise. Agencies paste their roster, up to fifty creators and products (these are example creators), and get fifty Monday briefs in one click.</aside>
   </section>
 
   <!-- ================= 8 HOW IT WORKS ================= -->
@@ -704,7 +707,7 @@ body{cursor:default;user-select:none}
         <i class="pk" style="--i:0;--c:var(--vis)"></i><i class="pk" style="--i:1;--c:var(--spk)"></i><i class="pk" style="--i:2;--c:var(--ocr)"></i><i class="pk" style="--i:3;--c:var(--snd)"></i><i class="pk" style="--i:4;--c:var(--fmt)"></i>
       </div>
       <div class="stations">
-        <div class="st" style="--i:0;--c:var(--lime)"><span class="tag">Oriane REST<br>/contents/search</span><div class="node">01</div><div class="card"><h5>Named sub-queries</h5><p><code>said</code> <code>onscreen</code><br><code>caption</code> <code>seen</code><br>OR-ed. Top by views + most recent, projection=full.</p></div></div>
+        <div class="st" style="--i:0;--c:var(--lime)"><span class="tag">Oriane REST<br>/contents/search</span><div class="node">01</div><div class="card"><h5>Named sub-queries</h5><p><code>said</code> <code>onscreen</code> <code>caption</code><br>OR-ed. Top by views + most recent, projection=full.</p></div></div>
         <div class="st" style="--i:1;--c:var(--vis)"><span class="tag">Oriane<br>AI Vision</span><div class="node">02</div><div class="card"><h5>6 AI-Vision probes</h5><p>Restricted to corpus IDs: face-to-camera, hands + product, screen rec, outdoors, text card, before / after.</p></div></div>
         <div class="st" style="--i:2;--c:var(--ocr)"><span class="tag">deterministic<br>5 tracks</span><div class="node">03</div><div class="card"><h5>32 gene extractors</h5><p>Every gene keeps its source field + timestamp: transcriptChunks, onScreenTextRegions, audioTitle…</p></div></div>
         <div class="st" style="--i:3;--c:var(--snd)"><span class="tag">per niche<br>with n</span><div class="node">04</div><div class="card"><h5>Lift stats</h5><p>Median views / follower with ÷ without, plus top- vs bottom-quartile share.</p></div></div>
@@ -722,7 +725,7 @@ body{cursor:default;user-select:none}
         <span><i class="tdot" style="background:var(--fmt)"></i>duration · views · followers</span>
       </div>
     </div>
-    <aside class="notes">Under the hood: Oriane search with four named sub-queries, six AI-Vision probes restricted to our corpus, thirty-two deterministic gene extractors, lift stats, then a template fork engine with optional LLM polish on GMI Cloud. For judging criterion one: every gene is an Oriane field plus a timestamp. Live sequences are cached, so the demo survives bad wifi.</aside>
+    <aside class="notes">Under the hood: Oriane search with three named sub-queries (said, on-screen, caption), six AI-Vision probes restricted to the corpus we found, thirty-two deterministic gene extractors, lift stats, then a template fork engine with optional LLM polish on GMI Cloud. For judging criterion one: every gene is an Oriane field plus a timestamp. Live sequences are cached, so the demo survives bad wifi.</aside>
   </section>
 
   <!-- ================= 9 BUSINESS ================= -->
