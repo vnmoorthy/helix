@@ -67,6 +67,15 @@ export type GeneStat = {
   examples: string[]; // video ids, best first
 };
 
+export type Brief = {
+  headline: string;
+  moves: string[];
+  avoid: string;
+  hooks: string[];
+  via: string; // e.g. "GMI Cloud · DeepSeek-V4.1-Flash"
+  generatedAt: string;
+};
+
 export type NicheReport = {
   query: string;
   source: "live" | "cache" | "sample";
@@ -79,6 +88,7 @@ export type NicheReport = {
   medianViews: number;
   totalViews: number;
   notes: string[];
+  brief?: Brief | null;
 };
 
 export type ForkBeat = {
@@ -103,6 +113,6 @@ export type ForkPlan = {
   caption: string;
   hashtags: string[];
   predictedLift: number;
-  engine: "helix-template" | "llm";
+  engine: string; // "helix-template" or the LLM label, e.g. "GMI Cloud · DeepSeek-V4.1-Flash"
   sourceVideoId?: string;
 };

@@ -3,7 +3,7 @@
 //  - server (default): calls the Next.js route handlers, which call Oriane live.
 //  - static (NEXT_PUBLIC_STATIC=1, GitHub Pages): reads niches pre-sequenced from live
 //    Oriane data as JSON, runs the fork engine in the browser, never ships an API key.
-import type { ForkPlan, NicheReport } from "./types";
+import type { Brief, ForkPlan, NicheReport } from "./types";
 import type { ForkInput } from "./fork";
 
 export const STATIC = process.env.NEXT_PUBLIC_STATIC === "1";
@@ -48,6 +48,13 @@ export async function forkPlan(body: ForkInput): Promise<ForkPlan> {
     return templateFork({ ...body, creator: body.creator || "you", niche: body.niche || "your niche" });
   }
   return fetch("/api/fork", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) }).then((r) => r.json());
+}
+
+export async function getBrief(report: NicheReport): Promise<Brief | null> {
+  if (STATIC || report.brief !== undefined) return report.brief ?? null;
+  if (report.source === "sample") return null;
+  const j = await fetch(`/api/brief?q=${encodeURIComponent(report.query)}`).then((r) => r.json()).catch(() => null);
+  return j?.brief ?? null;
 }
 
 export const nicheHref = (q: string) => `/n?q=${encodeURIComponent(q)}`;

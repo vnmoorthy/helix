@@ -43,7 +43,8 @@ Type a niche — `protein coffee`, `ai tools`, `skincare routine` — and Helix:
 1. **Sequences it.** Pulls the hits and the long tail for that niche from [Oriane](https://www.oriane.xyz)'s TikTok + Instagram index. Videos are found three ways at once: by what's **said**, what's **written on screen**, and what's **captioned**. Six AI-Vision probes then tag what's **shown**. For every video we know _how_ it was found, so Helix can tell you what share of the niche is invisible to caption-based tools.
 2. **Extracts 32 genes per video** across five tracks — **Visual · Spoken · On-screen · Sound · Format**. Every gene carries a timestamp and the exact Oriane field it was read from. Nothing on screen is guessed by an LLM.
 3. **Measures lift.** For every gene: median views-per-follower _with_ vs _without_ it, plus its share of top-quartile vs bottom-quartile videos. The **winning genome** is the strongest lifting gene per track.
-4. **Forks it.** Turn the winning genome (or any single video's genome) into a 4-beat shot list — HOOK · SETUP · PROOF · CTA — that **inherits the structure and swaps every piece of content**. Or batch-fork it across your whole creator roster in one click.
+4. **Briefs you.** An LLM on **GMI Cloud** (DeepSeek-V4.1-Flash) reads *only* the measured lift numbers and the top videos' real opening lines, then writes a Monday brief: the headline finding, 3 moves with their numbers, 1 thing to stop, and 3 hooks that fit the genome.
+5. **Forks it.** Turn the winning genome (or any single video's genome) into a 4-beat shot list — HOOK · SETUP · PROOF · CTA — that **inherits the structure and swaps every piece of content**. Or batch-fork it across your whole creator roster in one click.
 
 > **Structure, never content.** Songs share chord progressions; videos can share genomes. Helix never copies footage, words or music — it copies what works.
 
@@ -92,7 +93,7 @@ Click any video to open its genome: a five-track timeline of **frames** (with AI
 - **One creator:** "What's your video about?" → a filmable 4-beat shot list with shot, line, overlay and sound per beat, inherited-gene badges, and a genome lift score.
 - **Agency roster:** paste `handle, product` for 5 or 50 creators → one proven genome becomes 50 Monday briefs. Export all as Markdown.
 - **Export:** copy as Markdown, download `.md`, or print.
-- **Optional LLM polish:** set `GMI_API_KEY` (GMI Cloud inference), `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` and Helix rewrites the spoken lines in the creator's voice **while keeping every gene fixed**. With no key it uses the deterministic template engine.
+- **LLM polish on GMI Cloud:** with `GMI_API_KEY` set, Helix rewrites the spoken lines and overlays in the creator's voice **while keeping every gene fixed** (DeepSeek-V4.1-Flash, about 5s). `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` also work. With no key, the deterministic template engine runs.
 
 ---
 
@@ -121,11 +122,12 @@ No key yet? Helix still runs end to end on a seeded **sample corpus**, clearly l
 | Env var | Required | What it does |
 | --- | --- | --- |
 | `ORIANE_API_KEY` | for live data | Oriane REST key — every sequence calls `connect.oriane.xyz/rest` |
-| `GMI_API_KEY` / `GMI_MODEL` / `GMI_BASE_URL` | optional | LLM polish for forks via GMI Cloud (OpenAI-compatible) |
+| `GMI_API_KEY` | recommended | GMI Cloud inference for the **AI genome brief** and **fork polish** |
+| `GMI_MODEL` / `GMI_BASE_URL` / `GMI_REASONING_EFFORT` | optional | Defaults: `deepseek-ai/DeepSeek-V4.1-Flash`, `https://api.gmi-serving.com/v1`, `none` (skips hidden reasoning, so answers come in about 1.5s) |
 | `ANTHROPIC_API_KEY` / `ANTHROPIC_MODEL` | optional | LLM polish via Claude |
 | `OPENAI_API_KEY` | optional | LLM polish via OpenAI |
 
-**Live demo (GitHub Pages):** [vnmoorthy.github.io/helix](https://vnmoorthy.github.io/helix/) is a static edition. It serves niches pre-sequenced from live Oriane data, runs the fork engine in your browser, and never ships an API key. Rebuild it with `bash app/scripts/build-pages.sh` and publish `app/out` to the `gh-pages` branch. Live sequencing of *any* niche runs in the server version (local or Vercel).
+**Live demo (GitHub Pages):** [vnmoorthy.github.io/helix](https://vnmoorthy.github.io/helix/) is a static edition. It serves niches pre-sequenced from live Oriane data, with **GMI Cloud genome briefs generated at build time** and the fork engine running in your browser. It never ships an API key. Rebuild it with `bash app/scripts/build-pages.sh` and publish `app/out` to the `gh-pages` branch. Live sequencing of *any* niche runs in the server version (local or Vercel).
 
 **Deploy your own:** click **Deploy with Vercel** above (root directory `app`, set `ORIANE_API_KEY`), or run `bash app/scripts/deploy.sh`. The repo ships recorded live sequences for `protein coffee`, `ai tools` and more in `app/data/cache/`, so a fresh deployment opens real data instantly.
 
@@ -147,8 +149,10 @@ flowchart LR
     GE --> LS[Lift stats<br/>with ÷ without · quartiles]
     LS --> WG[Winning genome]
     WG --> UI
+    UI -->|GET /api/brief| BR[brief.ts<br/>AI genome brief]
+    BR --> LLM[GMI Cloud<br/>DeepSeek-V4.1-Flash]
     UI -->|POST /api/fork| FK[fork.ts<br/>template engine]
-    FK -.optional.-> LLM[GMI Cloud / Claude / OpenAI]
+    FK -.polish.-> LLM
     FK --> UI
     ENG <--> C[(data/cache<br/>sequence cache)]
 ```
@@ -183,7 +187,10 @@ Views-per-follower normalises away creator size (a 10M-follower account isn't "b
 
 > Helix shows correlation with receipts, not causation. Every fork is a testable hypothesis, and the "genome lift score" on a fork is a geometric blend of the inherited genes' lifts — a prior, not a promise.
 
-### 5 · Fork engine
+### 5 · AI genome brief (GMI Cloud)
+`lib/brief.ts` sends GMI Cloud's DeepSeek-V4.1-Flash the ranked gene table (lift, n, quartile shares), the underperforming genes, and the real opening lines (spoken plus on-screen) of the top 8 videos. The prompt allows only claims that cite those numbers. The JSON brief is cached per niche next to its sequence, and for the static site it is generated at build time by `scripts/precompute.ts`.
+
+### 6 · Fork engine
 `lib/fork.ts` maps genes onto four beats. For example `hook.question` + `hook.you` → _“Why is nobody telling you this about {product}?”_; `text.hook` + `text.caps` → an ALL-CAPS headline burned onto frame one; `vis.hands` → _“Extreme close-up: your hands bring {product} into frame”_; `sound.trending` → the niche's most reused track. Every beat lists the genes it inherits and the content it swaps.
 
 ---
@@ -200,7 +207,8 @@ helix/
 │   │   ├── g/[q]/page.tsx       # niche genome report
 │   │   └── api/
 │   │       ├── niche/route.ts   # GET  → NicheReport (sequence + genes + lift)
-│   │       ├── fork/route.ts    # POST → ForkPlan (template, optional LLM)
+│   │       ├── fork/route.ts    # POST → ForkPlan (template + GMI polish)
+│   │       ├── brief/route.ts   # GET  → AI genome brief (GMI Cloud)
 │   │       ├── status/route.ts  # GET  → live/sample, LLM, cached niches
 │   │       └── key/route.ts     # POST → set ORIANE_API_KEY (localhost only)
 │   ├── components/
@@ -212,7 +220,10 @@ helix/
 │   │   ├── oriane.ts            # typed Oriane REST client (auth auto-detect)
 │   │   ├── engine.ts            # orchestration, AI-Vision probes, cache
 │   │   ├── genes.ts             # 32-gene catalog, extractors, lift statistics
-│   │   ├── fork.ts              # shot-list engine + LLM polish
+│   │   ├── fork.ts              # shot-list engine + GMI polish
+│   │   ├── brief.ts             # AI genome brief (grounded in lift stats)
+│   │   ├── llm.ts               # GMI Cloud / Claude / OpenAI client
+│   │   ├── client.ts            # browser data layer (server or static mode)
 │   │   ├── sample.ts            # seeded sample corpus (no-key mode)
 │   │   └── types.ts
 │   └── data/cache/              # recorded live sequences (demo-proof)

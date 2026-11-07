@@ -3,7 +3,9 @@ import path from "node:path";
 import { searchContents, createTextAsset, orianeKey, OrianeError, type ContentQuery, type ContentFilters } from "./oriane";
 import { analyze, slim, VISUAL_PROBES } from "./genes";
 import { sampleCorpus } from "./sample";
-import type { NicheReport, SlimVideo } from "./types";
+import type { Brief, NicheReport, SlimVideo } from "./types";
+import { llmProvider } from "./llm";
+import { genomeBrief } from "./brief";
 
 // Bundled, read-only sequences (committed to the repo — instant demos anywhere)
 const BUNDLED_DIR = path.join(process.cwd(), "data", "cache");
@@ -128,7 +130,7 @@ export type EngineStatus = { oriane: boolean; llm: string | null; hosted: boolea
 export function status(): EngineStatus {
   return {
     oriane: !!orianeKey(),
-    llm: process.env.ANTHROPIC_API_KEY ? "claude" : process.env.GMI_API_KEY ? "gmi" : process.env.OPENAI_API_KEY ? "openai" : null,
+    llm: llmProvider()?.label || null,
     hosted: !!process.env.VERCEL,
   };
 }
@@ -140,6 +142,11 @@ async function readCache(s: string): Promise<CacheFile | null> {
   const b = WRITE_DIR === BUNDLED_DIR ? null : await readJson<CacheFile>(path.join(BUNDLED_DIR, `${s}.json`));
   if (w && b) return w.fetchedAt > b.fetchedAt ? w : b;
   return w || b;
+}
+
+export async function isCached(q: string): Promise<boolean> {
+  const c = await readCache(slug(q));
+  return !!c?.corpus?.length && Date.now() - new Date(c.fetchedAt).getTime() < CACHE_TTL_MS;
 }
 
 export async function nicheReport(q: string, opts: { fresh?: boolean; progress?: Progress } = {}): Promise<NicheReport> {
@@ -195,4 +202,18 @@ export async function listCached(): Promise<{ q: string; slug: string; n: number
     }
   }
   return [...out.values()].sort((a, b) => b.fetchedAt.localeCompare(a.fetchedAt));
+}
+
+// AI genome brief, cached per niche next to its sequence
+export async function nicheBrief(q: string): Promise<Brief | null> {
+  const s = slug(q);
+  const file = path.join(WRITE_DIR, "briefs", `${s}.json`);
+  const bundled = path.join(BUNDLED_DIR, "briefs", `${s}.json`);
+  const report = await nicheReport(q);
+  const cached = (await readJson<Brief & { fetchedAt?: string }>(file)) || (await readJson<Brief & { fetchedAt?: string }>(bundled));
+  if (cached && cached.fetchedAt === report.fetchedAt) return cached;
+  if (report.source === "sample") return null;
+  const b = await genomeBrief(report);
+  if (b) await writeJson(file, { ...b, fetchedAt: report.fetchedAt });
+  return b;
 }

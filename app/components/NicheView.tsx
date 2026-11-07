@@ -7,7 +7,9 @@ import type { GeneStat, NicheReport, SlimVideo, Track } from "@/lib/types";
 import { KeyModal, Logo, SourceBadge, StatusPill, TRACK_COLOR, TRACK_FIELD, TRACK_LABEL, Thumb, fmt, useStatus } from "./ui";
 import { VideoGenome } from "./GenomeStrip";
 import { ForkPanel } from "./ForkPanel";
-import { getNiche, nicheHref } from "@/lib/client";
+import { getBrief, getNiche, nicheHref } from "@/lib/client";
+import { BriefCard } from "./BriefCard";
+import type { Brief } from "@/lib/types";
 
 const STEPS = [
   "Querying Oriane: what's said, overlaid & captioned",
@@ -29,6 +31,7 @@ export function NicheView({ q }: { q: string }) {
   const [fork, setFork] = useState<{ genes: string[]; source?: SlimVideo | null; product?: string; creator?: string } | null>(null);
   const [keyOpen, setKeyOpen] = useState(false);
   const [search, setSearch] = useState(q);
+  const [brief, setBrief] = useState<Brief | null | undefined>(undefined);
   useEffect(() => setSearch(q), [q]);
   const { status, reload } = useStatus();
 
@@ -40,6 +43,8 @@ export function NicheView({ q }: { q: string }) {
     try {
       const j = await getNiche(q, fresh);
       setData(j);
+      setBrief(undefined);
+      getBrief(j).then(setBrief).catch(() => setBrief(null));
       // deep links: ?video=<id|top> opens a genome, ?fork=1 opens the fork panel, ?gene=<id> filters
       const sp = new URLSearchParams(window.location.search);
       const rep = j as NicheReport;
@@ -162,6 +167,9 @@ export function NicheView({ q }: { q: string }) {
               <Sig icon={Hash} c={TRACK_COLOR.format} k="caption" n={data.signalCounts.caption} />
               <span className="text-muted">A caption-only tool would have found <b className="text-ink">{data.signalCounts.caption}</b> of these <b className="text-ink">{data.signalCounts.total}</b>.</span>
             </section>
+
+            {/* AI genome brief (GMI Cloud) */}
+            {data.source !== "sample" && (brief !== null || status?.llm) && <BriefCard brief={brief} llm={status?.llm || null} />}
 
             {/* Winning genome */}
             <section className="mt-8 card glow p-5 sm:p-7">

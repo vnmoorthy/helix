@@ -133,49 +133,28 @@ export function templateFork(i: ForkInput): ForkPlan {
   };
 }
 
-// Optional LLM polish — rewrites the spoken lines in the creator's voice while
-// keeping the gene structure fixed. Works with Anthropic, GMI Cloud (OpenAI
-// compatible) or OpenAI. Falls back silently to the template.
+// Optional LLM polish (GMI Cloud by default) — rewrites the spoken lines and
+// overlays in the creator's voice while keeping the gene structure fixed.
+// Falls back silently to the deterministic template.
 export async function llmFork(i: ForkInput): Promise<ForkPlan> {
   const plan = templateFork(i);
+  const { chat, parseJson } = await import("./llm");
   const geneList = i.genes.map((id) => `${id} (${GENE_BY_ID[id]?.recipe || ""})`).join("\n");
-  const prompt = `You are a short-form video scriptwriter. Rewrite the SAY and ONSCREEN lines of this 4-beat shot list for a video about "${i.product}" by creator @${i.creator} in the "${i.niche}" niche${i.audience ? " for " + i.audience : ""}.
-You MUST keep every inherited gene (structure) below, but never copy any source content. Return ONLY JSON: {"beats":[{"say":"...","onscreen":"..."} x4],"caption":"..."}.
+  const prompt = `You are a short-form video scriptwriter. Rewrite the SAY and ONSCREEN lines of this 4-beat shot list for a video about "${i.product}" by creator @${i.creator.replace(/^@/, "")} in the "${i.niche}" niche${i.audience ? " for " + i.audience : ""}.
+Keep every inherited gene (the structure) below, but write original content, never copied. Keep the HOOK under 14 words. Return ONLY JSON: {"beats":[{"say":"...","onscreen":"..."},{"say":"...","onscreen":"..."},{"say":"...","onscreen":"..."},{"say":"...","onscreen":"..."}],"caption":"..."}.
 Genes:\n${geneList}\nCurrent plan:\n${JSON.stringify(plan.beats.map((b) => ({ slot: b.slot, say: b.say, onscreen: b.onscreen })))}`;
-  try {
-    let text = "";
-    if (process.env.ANTHROPIC_API_KEY) {
-      const r = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
-        body: JSON.stringify({ model: process.env.ANTHROPIC_MODEL || "claude-sonnet-5-5", max_tokens: 900, messages: [{ role: "user", content: prompt }] }),
-      });
-      const j = await r.json();
-      text = j?.content?.[0]?.text || "";
-    } else if (process.env.GMI_API_KEY || process.env.OPENAI_API_KEY) {
-      const gmi = !!process.env.GMI_API_KEY;
-      const r = await fetch(gmi ? (process.env.GMI_BASE_URL || "https://api.gmi-serving.com/v1") + "/chat/completions" : "https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: { authorization: `Bearer ${gmi ? process.env.GMI_API_KEY : process.env.OPENAI_API_KEY}`, "content-type": "application/json" },
-        body: JSON.stringify({ model: gmi ? process.env.GMI_MODEL || "deepseek-ai/DeepSeek-V3-0324" : "gpt-4o-mini", messages: [{ role: "user", content: prompt }], temperature: 0.7, max_tokens: 900 }),
-      });
-      const j = await r.json();
-      text = j?.choices?.[0]?.message?.content || "";
-    } else return plan;
-    const m = text.match(/\{[\s\S]*\}/);
-    if (!m) return plan;
-    const parsed = JSON.parse(m[0]) as { beats?: { say?: string; onscreen?: string }[]; caption?: string };
-    parsed.beats?.forEach((b, k) => {
-      if (!plan.beats[k]) return;
-      if (b.say) plan.beats[k].say = b.say;
-      if (b.onscreen) plan.beats[k].onscreen = b.onscreen;
-    });
-    if (parsed.caption) plan.caption = parsed.caption;
-    plan.engine = "llm";
-    return plan;
-  } catch {
-    return plan;
-  }
+  const res = await chat(prompt, { maxTokens: 700, temperature: 0.7, timeoutMs: 30_000 });
+  if (!res) return plan;
+  const parsed = parseJson<{ beats?: { say?: string; onscreen?: string }[]; caption?: string }>(res.text);
+  if (!parsed?.beats?.length) return plan;
+  parsed.beats.forEach((b, k) => {
+    if (!plan.beats[k]) return;
+    if (b.say && plan.beats[k].say !== "(no voice)") plan.beats[k].say = b.say;
+    if (b.onscreen && !/^\(|^—$/.test(plan.beats[k].onscreen)) plan.beats[k].onscreen = b.onscreen;
+  });
+  if (parsed.caption) plan.caption = parsed.caption;
+  plan.engine = res.via.label;
+  return plan;
 }
 
 export function genesFromWinning(w: GeneStat[]) {

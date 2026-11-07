@@ -5,6 +5,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 export npm_config_cache="${npm_config_cache:-${TMPDIR:-/tmp}/helix-npm-cache}"
 npx --yes tsx scripts/precompute.ts
+rm -rf .next/types .next/dev/types
 STASH="$(mktemp -d)"
 mv app/api "$STASH/api"
 trap 'mv "$STASH/api" app/api' EXIT
