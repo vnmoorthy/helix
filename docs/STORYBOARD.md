@@ -3,7 +3,7 @@
 **Format:** 3:00 pitch + 2:00 Q&A (Hack the Feed finals, 5:30 PM).
 **Setup before you walk on:** laptop on power, Wi-Fi on, two browser tabs open and zoomed to 110%:
 1. **Deck** — `deck/index.html`, slide 1, fullscreen (`F`).
-2. **App** — `http://localhost:3000/g/protein%20coffee` already loaded (a live sequence cached, so it opens instantly).
+2. **App** — `http://localhost:3000/n?q=protein%20coffee` already loaded (a live sequence cached, so it opens instantly).
 
 Have one backup niche already sequenced (e.g. `ai tools`) in case the room asks for another.
 

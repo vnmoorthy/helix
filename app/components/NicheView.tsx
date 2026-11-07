@@ -7,6 +7,7 @@ import type { GeneStat, NicheReport, SlimVideo, Track } from "@/lib/types";
 import { KeyModal, Logo, SourceBadge, StatusPill, TRACK_COLOR, TRACK_FIELD, TRACK_LABEL, Thumb, fmt, useStatus } from "./ui";
 import { VideoGenome } from "./GenomeStrip";
 import { ForkPanel } from "./ForkPanel";
+import { getNiche, nicheHref } from "@/lib/client";
 
 const STEPS = [
   "Querying Oriane: what's said, overlaid & captioned",
@@ -28,6 +29,7 @@ export function NicheView({ q }: { q: string }) {
   const [fork, setFork] = useState<{ genes: string[]; source?: SlimVideo | null; product?: string; creator?: string } | null>(null);
   const [keyOpen, setKeyOpen] = useState(false);
   const [search, setSearch] = useState(q);
+  useEffect(() => setSearch(q), [q]);
   const { status, reload } = useStatus();
 
   const load = async (fresh = false) => {
@@ -36,9 +38,7 @@ export function NicheView({ q }: { q: string }) {
     setStep(0);
     const iv = setInterval(() => setStep((s) => Math.min(STEPS.length - 1, s + 1)), fresh ? 7000 : 600);
     try {
-      const r = await fetch(`/api/niche?q=${encodeURIComponent(q)}${fresh ? "&fresh=1" : ""}`);
-      const j = await r.json();
-      if (!r.ok) throw new Error(j.error || "Failed");
+      const j = await getNiche(q, fresh);
       setData(j);
       // deep links: ?video=<id|top> opens a genome, ?fork=1 opens the fork panel, ?gene=<id> filters
       const sp = new URLSearchParams(window.location.search);
@@ -89,7 +89,7 @@ export function NicheView({ q }: { q: string }) {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              if (search.trim()) router.push(`/g/${encodeURIComponent(search.trim())}`);
+              if (search.trim()) router.push(nicheHref(search.trim()));
             }}
             className="flex-1 max-w-md mx-auto hidden sm:flex items-center gap-2 bg-panel border border-line rounded-xl px-3 py-1.5"
           >

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowRight, Search, Eye, Mic, Type, Music2, Dna, GitFork, BarChart3, Database } from "lucide-react";
 import { HelixArt, KeyModal, Logo, StatusPill, useStatus } from "@/components/ui";
+import { nicheHref } from "@/lib/client";
 
 const EXAMPLES = ["protein coffee", "skincare routine", "ai tools", "home workout", "meal prep", "travel hacks"];
 
@@ -12,7 +13,7 @@ export default function Home() {
   const [q, setQ] = useState("");
   const [keyOpen, setKeyOpen] = useState(false);
   const { status, reload } = useStatus();
-  const go = (term: string) => term.trim() && router.push(`/g/${encodeURIComponent(term.trim())}`);
+  const go = (term: string) => term.trim() && router.push(nicheHref(term.trim()));
 
   return (
     <main className="relative z-10 min-h-screen">
@@ -63,7 +64,7 @@ export default function Home() {
           </div>
           {!!status?.cached?.length && (
             <div className="mt-8 max-w-2xl">
-              <div className="text-xs mono text-muted mb-2 flex items-center gap-1.5"><Database size={12} /> Sequenced from live Oriane data</div>
+              <div className="text-xs mono text-muted mb-2 flex items-center gap-1.5"><Database size={12} /> Sequenced from live Oriane data — open instantly</div>
               <div className="flex flex-wrap gap-2">
                 {status.cached.slice(0, 8).map((c) => (
                   <button key={c.slug} onClick={() => go(c.q)} className="text-sm rounded-lg bg-panel2 border border-line px-3 py-1.5 hover:border-sky/50 transition">

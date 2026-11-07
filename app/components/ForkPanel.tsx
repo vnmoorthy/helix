@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Check, Copy, Download, GitFork, Loader2, Printer, Users, X, Sparkles } from "lucide-react";
 import type { ForkPlan, GeneStat, SlimVideo } from "@/lib/types";
 import { TRACK_COLOR, fmtT } from "./ui";
+import { forkPlan } from "@/lib/client";
 
 type Props = {
   niche: string;
@@ -75,15 +76,14 @@ export function ForkPanel({ niche, stats, initialGenes, source, trendingSound, o
   const generate = async () => {
     if (!product.trim()) return;
     setBusy(true);
-    const r = await fetch("/api/fork", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body(product.trim(), creator.trim())) });
-    setPlan(await r.json());
+    setPlan(await forkPlan(body(product.trim(), creator.trim())));
     setBusy(false);
   };
 
   const generateRoster = async () => {
     setBusy(true);
     const rows = roster.split("\n").map((l) => l.split(",").map((x) => x.trim())).filter((r) => r[0] && r[1]);
-    const plans = await Promise.all(rows.map(([c, p]) => fetch("/api/fork", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body(p, c)) }).then((r) => r.json())));
+    const plans = await Promise.all(rows.map(([c, p]) => forkPlan(body(p, c))));
     setRosterPlans(plans);
     setBusy(false);
   };

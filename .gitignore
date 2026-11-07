@@ -46,3 +46,7 @@ app/.env*
 .claude/
 !.env.example
 !app/.env.example
+
+# static pages build artifacts
+app/public/data/
+app/out/

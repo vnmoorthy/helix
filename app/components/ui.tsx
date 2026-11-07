@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { KeyRound, Radio, Database, FlaskConical, X } from "lucide-react";
 import type { Track } from "@/lib/types";
+import { getStatus, type Status } from "@/lib/client";
+export type { Status };
 
 export const TRACK_COLOR: Record<Track, string> = {
   visual: "#d9f99d",
@@ -80,11 +82,10 @@ export function HelixArt({ className = "" }: { className?: string }) {
   );
 }
 
-export type Status = { oriane: boolean; llm: string | null; cached: { q: string; slug: string; n: number; fetchedAt: string }[] };
 
 export function useStatus() {
   const [s, setS] = useState<Status | null>(null);
-  const load = () => fetch("/api/status").then((r) => r.json()).then(setS).catch(() => {});
+  const load = () => getStatus().then(setS).catch(() => {});
   useEffect(() => {
     load();
   }, []);
@@ -93,6 +94,12 @@ export function useStatus() {
 
 export function StatusPill({ status, onConnect }: { status: Status | null; onConnect: () => void }) {
   if (!status) return <div className="h-8 w-40 rounded-full bg-panel2 animate-pulse" />;
+  if (status.static)
+    return (
+      <span className="flex items-center gap-1.5 text-xs mono rounded-full border border-sky/40 text-sky px-3 py-1.5" title="Static GitHub Pages edition: niches pre-sequenced from live Oriane data">
+        <Database size={13} /> {status.cached.length} niches · live Oriane data
+      </span>
+    );
   return (
     <div className="flex items-center gap-2">
       {status.oriane ? (

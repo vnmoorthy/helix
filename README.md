@@ -20,6 +20,8 @@
 [![CI](https://github.com/vnmoorthy/helix/actions/workflows/ci.yml/badge.svg)](https://github.com/vnmoorthy/helix/actions/workflows/ci.yml)
 [![GitHub stars](https://img.shields.io/github/stars/vnmoorthy/helix?style=social)](https://github.com/vnmoorthy/helix/stargazers)
 
+### [▶ Try the live demo → vnmoorthy.github.io/helix](https://vnmoorthy.github.io/helix/)
+
 [**Quickstart**](#-quickstart) · [**Real findings**](#-real-findings-from-live-oriane-data) · [**How it works**](#-how-it-works) · [**Architecture**](#-architecture) · [**The 32 genes**](#-the-gene-catalog) · [**Pitch deck**](#-pitch-deck) · [**Why Helix**](#-why-this-exists)
 
 <br/>
@@ -123,9 +125,11 @@ No key yet? Helix still runs end to end on a seeded **sample corpus**, clearly l
 | `ANTHROPIC_API_KEY` / `ANTHROPIC_MODEL` | optional | LLM polish via Claude |
 | `OPENAI_API_KEY` | optional | LLM polish via OpenAI |
 
+**Live demo (GitHub Pages):** [vnmoorthy.github.io/helix](https://vnmoorthy.github.io/helix/) is a static edition. It serves niches pre-sequenced from live Oriane data, runs the fork engine in your browser, and never ships an API key. Rebuild it with `bash app/scripts/build-pages.sh` and publish `app/out` to the `gh-pages` branch. Live sequencing of *any* niche runs in the server version (local or Vercel).
+
 **Deploy your own:** click **Deploy with Vercel** above (root directory `app`, set `ORIANE_API_KEY`), or run `bash app/scripts/deploy.sh`. The repo ships recorded live sequences for `protein coffee`, `ai tools` and more in `app/data/cache/`, so a fresh deployment opens real data instantly.
 
-**Deep links** (great for demos): `/g/protein%20coffee?video=top` opens the top video's genome · `?fork=1&product=oat-milk%20cold%20brew&creator=maya.lifts` opens a generated fork · `?gene=text.hook` filters the wall.
+**Deep links** (great for demos): `/n?q=protein%20coffee&video=top` opens the top video's genome · `/n?q=protein%20coffee&fork=1&product=oat-milk%20cold%20brew&creator=maya.lifts` opens a generated fork · `?gene=text.hook` filters the wall.
 
 ---
 
