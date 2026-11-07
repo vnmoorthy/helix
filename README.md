@@ -16,6 +16,7 @@
 [![Hack the Feed](https://img.shields.io/badge/Hack%20the%20Feed-Amplitude%20HQ%20·%20Nov%206%202026-fcd34d?style=for-the-badge&labelColor=111114)](https://luma.com/92iq2a12)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvnmoorthy%2Fhelix&root-directory=app&env=ORIANE_API_KEY&envDescription=Oriane%20REST%20API%20key&envLink=https%3A%2F%2Fapp.oriane.xyz%2Fbilling%2Fsubscription%3Ftab%3Dapi&project-name=helix)
+[![Release](https://img.shields.io/github/v/release/vnmoorthy/helix?color=e4f56a&labelColor=111114)](https://github.com/vnmoorthy/helix/releases/latest)
 [![CI](https://github.com/vnmoorthy/helix/actions/workflows/ci.yml/badge.svg)](https://github.com/vnmoorthy/helix/actions/workflows/ci.yml)
 [![GitHub stars](https://img.shields.io/github/stars/vnmoorthy/helix?style=social)](https://github.com/vnmoorthy/helix/stargazers)
 
