@@ -463,9 +463,9 @@ def build():
     s, sh = new()
     hx = helix(sh, 1440, 540, 1000, 165, 2.3, -0.2, 30)
     tags = []
-    for (tx, ty, lab, ts, col) in [(1090, 212, "Question hook", "@0:00", SPK), (1600, 372, "Text hook · frame 1", "", OCR),
-                                   (1060, 548, "Hands + product", "@0:01", VIS), (1610, 716, "Trending sound", "", SND),
-                                   (1130, 884, "9:16 · 21s · 8 cuts", "", FMT)]:
+    for (tx, ty, lab, ts, col) in [(1090, 212, "Contrarian hook", "", SPK), (1600, 372, "Text-heavy", "", OCR),
+                                   (1060, 548, "Hands + product", "", VIS), (1610, 716, "Licensed music", "", SND),
+                                   (1130, 884, "30–60s length", "", FMT)]:
         w = (len(lab) + len(ts) + 1) * 12.6 + 64
         g = group(sh, "gene tag")
         rect(g.shapes, tx, ty, w, 44, "0A0A0C", alpha=0.85, border=BORDER2, radius=10)
@@ -578,7 +578,7 @@ def build():
     eb = eyebrow(sh, 120, 92, "The product")
     tt = title(sh, [[("Sequence. Measure lift. ", {}), ("Fork.", {"grad": True})]], size=46)
     cards = []
-    specs = [("01 · SEQUENCE", "Sequence a niche", "Four named Oriane sub-queries, OR-ed. Every video knows how it was found."),
+    specs = [("01 · SEQUENCE", "Sequence a niche", "Three named Oriane sub-queries, OR-ed. Every video knows how it was found."),
              ("02 · MEASURE", "Measure lift", "Median views-per-follower with the gene ÷ without, plus top- vs bottom-quartile share."),
              ("03 · FORK", "Fork the genome", "Structure inherited, content original. A shot list you can film on Monday.")]
     for k, (lab, h3, p) in enumerate(specs):
@@ -591,27 +591,28 @@ def build():
         text(G, x + 40, y + 156, 440, 150, p, size=15, color=MUTED)
         if k == 0:
             for j, (q, d, c) in enumerate([("said", "transcript match", SPK), ("onscreen", "on-screen text match", OCR),
-                                           ("caption", "caption match", "8B8B94"), ("seen", "AI-Vision similarity", VIS)]):
+                                           ("caption", "caption match", "8B8B94"), ("AI Vision", "6 visual gene probes", VIS)]):
                 qx, qy = x + 40 + (j % 2) * 225, y + 338 + (j // 2) * 92
                 rect(G, qx, qy, 215, 82, PANEL2, border=BORDER, radius=12)
                 oval(G, qx + 22, qy + 28, 6, c)
                 text(G, qx + 36, qy + 14, 170, 30, q, size=13, bold=True, font=MONO, anchor="m")
                 text(G, qx + 16, qy + 48, 190, 26, d, size=10, color=MUTED)
             px_ = x + 40
-            for f, c in [(31, SPK), (17, OCR), (29, "5B5B64"), (23, VIS)]:
-                w = 440 * f / 100 - 3
-                rect(G, px_, y + 540, w, 16, c, radius=8)
+            for f, c in [(32, SPK), (70, OCR), (14, "5B5B64")]:
+                w = 440 * f / 116 - 3
+                rect(G, px_, y + 530, w, 16, c, radius=8)
                 px_ += w + 3
+            text(G, x + 40, y + 556, 440, 24, "said 32 · on-screen 70 · caption 14", size=9.5, color=MUTED, font=MONO)
         if k == 1:
             rect(G, x + 40, y + 360, 96, 170, grad=GRAD, ang=90, radius=12)
-            rect(G, x + 156, y + 466, 96, 64, "34343C", radius=12)
+            rect(G, x + 156, y + 506, 96, 24, "34343C", radius=8)
             text(G, x + 40, y + 540, 96, 24, "with", size=10, color=MUTED, font=MONO, align="c")
             text(G, x + 156, y + 540, 96, 24, "without", size=10, color=MUTED, font=MONO, align="c")
-            text(G, x + 262, y + 392, 220, 110, [[("×2.4", {"grad": True})]], size=50, bold=True, align="r", spc=-2)
-            text(G, x + 262, y + 500, 220, 60, ["example gene lift", "shown with n + receipts"], size=10, color=MUTED, font=MONO, align="r")
+            text(G, x + 262, y + 392, 220, 110, [[("×7.2", {"grad": True})]], size=50, bold=True, align="r", spc=-2)
+            text(G, x + 258, y + 502, 224, 60, ["30–60s length · n=24", "live Oriane data"], size=9, color=MUTED, font=MONO, align="r")
         if k == 2:
-            for j, (bt, tx_, c, badge) in enumerate([("HOOK", "Question + text card", SPK, "inherited"), ("SETUP", "Hands + product", VIS, "inherited"),
-                                                    ("PROOF", "Before / after, price", OCR, "inherited"), ("CTA", "Your product + voice", FMT, "swapped")]):
+            for j, (bt, tx_, c, badge) in enumerate([("HOOK", "Contrarian “you” hook", SPK, "inherited"), ("SETUP", "Text-heavy, 4–6 words", OCR, "inherited"),
+                                                    ("PROOF", "Hands + product", VIS, "inherited"), ("CTA", "Your product + voice", FMT, "swapped")]):
                 by = y + 330 + j * 60
                 rect(G, x + 40, by, 440, 50, PANEL2, border=BORDER, radius=12)
                 text(G, x + 56, by, 90, 50, bt, size=11, bold=True, font=MONO, color=c, anchor="m")
@@ -633,35 +634,36 @@ def build():
     tt = title(sh, "The Niche Genome", size=40)
     shot = screenshot(sh, "niche.png", 120, 250, 1060, 650, (0.075, 0.85, 0.0), "Helix Niche Genome page")
     eb2 = eyebrow(sh, 1236, 92, "Winning genome", w=560)
-    sub = text(sh, 1236, 134, 564, 40, "Strongest-lifting gene on each track", size=15, color=MUTED)
+    sub = text(sh, 1236, 134, 564, 40, "Live from Oriane · top genes by lift", size=15, color=MUTED)
     st = group(sh, "strand")
     for sgn, col, al in [(1, LIME, 0.9), (-1, PINK, 0.55)]:
-        pts = [(1266 + sgn * 26 * math.sin(i / 120 * 5 * math.pi), 196 + 690 * i / 120) for i in range(121)]
+        pts = [(1266 + sgn * 26 * math.sin(i / 120 * 5 * math.pi), 196 + 694 * i / 120) for i in range(121)]
         poly(st.shapes, pts, col, 3, al)
     wcards = []
     for i, (trk, col, gene, lift, rc) in enumerate([
-            ("Visual", VIS, "Hands + product", "2.2", "AI Vision probe · 62% top / 14% bottom"),
-            ("Spoken", SPK, "Listicle hook", "2.5", "transcriptChunks[0] · 38% top / 10% bottom"),
-            ("On-screen", OCR, "Text hook in frame 1", "2.2", "onScreenTextRegions · 76% top / 52% bottom"),
-            ("Sound", SND, "Trending sound", "1.3", "audioTitle · 33% top / 29% bottom"),
-            ("Format", FMT, "Long caption", "1.6", "caption · 38% of top quartile")]):
-        y = 196 + i * 140
-        seg(st.shapes, 1266, y + 62, 1312, y + 62, col, 2, 0.8)
-        g = group(sh, f"gene card {trk}")
-        rect(g.shapes, 1312, y, 488, 124, PANEL, border=BORDER2, radius=18)
-        oval(g.shapes, 1340, y + 30, 6, col, glow=(col, 6, 0.5))
-        text(g.shapes, 1356, y + 18, 240, 24, trk.upper(), size=10, bold=True, color=col, spc=2, anchor="m")
-        text(g.shapes, 1334, y + 46, 340, 40, gene, size=15, bold=True, spc=-0.3)
-        text(g.shapes, 1334, y + 88, 460, 24, rc, size=9, color=MUTED, font=MONO)
-        text(g.shapes, 1630, y + 14, 150, 60, [[("×", {"size": 14, "color": MUTED, "bold": False}), (lift, {})]], size=28, bold=True, align="r", spc=-1)
+            ("FORMAT", FMT, "30–60s length", "7.2", "media.duration · n=24"),
+            ("SOUND", SND, "Licensed music", "5.7", "audioTitle / audioAuthor"),
+            ("FORMAT", FMT, "Long story caption", "4.2", "caption"),
+            ("ON-SCREEN", OCR, "Text-heavy", "3.4", "onScreenTextRegions"),
+            ("SPOKEN", SPK, "Contrarian hook", "1.8", "transcriptChunks[0]"),
+            ("SPOKEN", SPK, "Direct ‘you’ hook", "1.4", "transcriptChunks[0]"),
+            ("VISUAL", VIS, "Hands + product", "1.3", "AI-Vision probe")]):
+        y = 196 + i * 102
+        seg(st.shapes, 1266, y + 45, 1312, y + 45, col, 2, 0.8)
+        g = group(sh, f"gene card {gene}")
+        rect(g.shapes, 1312, y, 488, 90, PANEL, border=BORDER2, radius=16)
+        text(g.shapes, 1336, y + 12, 330, 36, gene, size=15, bold=True, spc=-0.3, anchor="m")
+        oval(g.shapes, 1343, y + 64, 5, col, glow=(col, 6, 0.5))
+        text(g.shapes, 1356, y + 52, 284, 24, rc, size=9, color=MUTED, font=MONO, anchor="m")
+        text(g.shapes, 1640, y + 14, 140, 62, [[("×", {"size": 13, "color": MUTED, "bold": False}), (lift, {})]], size=26, bold=True, align="r", anchor="m", spc=-1)
         wcards.append(g)
     co = group(sh, "callouts")
-    text(co.shapes, 120, 928, 700, 40, [[("●  ", {"color": LIME, "size": 11}), ("Provenance bar: ", {"bold": True, "color": INK}),
-                                         ("how much caption search misses", {})]], size=14, color=MUTED, anchor="m")
-    text(co.shapes, 900, 928, 800, 40, [[("●  ", {"color": PINK, "size": 11}), ("Click a gene ", {"bold": True, "color": INK}),
-                                         ("→ the wall filters to videos carrying it", {})]], size=14, color=MUTED, anchor="m")
+    text(co.shapes, 120, 928, 810, 40, [[("●  ", {"color": LIME, "size": 11}), ("84% invisible to caption search: ", {"bold": True, "color": INK}),
+                                         ("caption-only finds 14 of 89", {})]], size=13, color=MUTED, anchor="m")
+    text(co.shapes, 950, 928, 850, 40, [[("●  ", {"color": PINK, "size": 11}), ("Click a gene ", {"bold": True, "color": INK}),
+                                         ("→ the wall filters to videos carrying it", {})]], size=13, color=MUTED, anchor="m")
     add_timing(s, [(eb, 100, "fade", 500), (tt, 200, "fade", 600), (eb2, 300, "fade", 500), (sub, 400, "fade", 500),
-                   (shot, 500, "fade", 800)] + stagger(wcards, 900, 200, "fly", 700) + [(st, 2000, "wipe", 900), (co, 2400, "fade", 600)])
+                   (shot, 500, "fade", 800)] + stagger(wcards, 900, 170, "fly", 700) + [(st, 2000, "wipe", 900), (co, 2400, "fade", 600)])
 
     # ---------------- 6 VIDEO GENOME
     s, sh = new()
@@ -670,9 +672,9 @@ def build():
     ld = text(sh, 120, 340, 520, 90, "Five tracks on one timeline. Every gene ships with its receipt.", size=16, color=MUTED)
     shot = screenshot(sh, "genome.png", 680, 150, 1120, 790, (0.14, 0.72, 0.03), "Helix Video Genome strip")
     rc = []
-    for i, (col, nm, field, rest) in enumerate([(SPK, "Listicle hook", "transcriptChunks[0]", " @0:00 · “…3 things…”"),
-                                                (OCR, "Text hook in frame 1", "frames[].onScreenTextRegions", " @0:00 · polygon"),
-                                                (SND, "Original audio", "audioTitle / audioAuthor", " · original sound")]):
+    for i, (col, nm, field, rest) in enumerate([(OCR, "Text hook in first 3s", "frames[].onScreenTextRegions", " @0:02 · “SANTE” · 2.1× in niche"),
+                                                (VIS, "Hands + product", "AI-Vision probe", " @0:02 · 1.3× in niche"),
+                                                (FMT, "Long caption", "caption", " · 344 chars · 4.2× in niche")]):
         y = 452 + i * 150
         g = group(sh, f"receipt {i + 1}")
         rect(g.shapes, 120, y, 500, 128, PANEL, border=BORDER, radius=18)
@@ -690,7 +692,7 @@ def build():
     rp = group(sh, "roster panel")
     rect(rp.shapes, 1220, 260, 580, 690, PANEL, border=BORDER, radius=26)
     text(rp.shapes, 1250, 290, 520, 44, "Agency roster mode", size=20, bold=True, spc=-0.5)
-    text(rp.shapes, 1250, 338, 520, 56, "Paste 5–50 creators + products → one proven genome → a Monday brief for everyone.", size=11, color=MUTED)
+    text(rp.shapes, 1250, 338, 520, 56, [[("Example roster. ", {"bold": True, "color": LIME}), ("Paste 5–50 creators + products → one proven genome → a Monday brief for everyone.", {})]], size=11, color=MUTED)
     rows = []
     for i, (prod, col) in enumerate(zip(["Oat protein latte", "Matcha whey shake", "Cold brew + collagen", "Mocha protein bar", "Vanilla cold foam"], TRACKS)):
         y = 410 + i * 74
@@ -698,7 +700,7 @@ def build():
         seg(g.shapes, 1250, y, 1772, y, BORDER, 1.2)
         av = oval(g.shapes, 1272, y + 37, 22, col)
         shape_text(av, f"{i + 1:02d}", size=10, bold=True, font=MONO, color="0B0B0D", align="c", inset=0)
-        text(g.shapes, 1310, y + 12, 300, 28, f"Creator {i + 1:02d}", size=13, bold=True)
+        text(g.shapes, 1310, y + 12, 300, 28, f"Example creator {i + 1:02d}", size=13, bold=True)
         text(g.shapes, 1310, y + 40, 300, 26, prod, size=11, color=MUTED)
         text(g.shapes, 1600, y + 12, 172, 50, "✓ brief ready", size=10, color=LIME, font=MONO, bold=True, align="r", anchor="m")
         rows.append(g)
@@ -718,7 +720,7 @@ def build():
     packets = [oval(sh, 245, 378, 7, c, glow=(c, 8, 0.7)) for c in TRACKS]
     rail = rect(sh, 245, 376, 1430, 4, grad=GRAD, radius=2, name="rail")
     stations = []
-    data = [("Oriane REST\n/contents/search", "Named sub-queries", "said · onscreen · caption · seen, OR-ed. Top by views + most recent, projection=full.", LIME),
+    data = [("Oriane REST\n/contents/search", "Named sub-queries", "said · onscreen · caption, OR-ed. Top by views + most recent, projection=full.", LIME),
             ("Oriane\nAI Vision", "6 AI-Vision probes", "Restricted to corpus IDs: face-to-camera, hands + product, screen rec, outdoors, text card, before / after.", VIS),
             ("deterministic\n5 tracks", "32 gene extractors", "Every gene keeps its source field + timestamp.", OCR),
             ("per niche\nwith n", "Lift stats", "Median views / follower with ÷ without, plus top- vs bottom-quartile share.", SND),
